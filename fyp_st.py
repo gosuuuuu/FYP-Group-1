@@ -32,7 +32,7 @@ def set_bg(img_path):
         unsafe_allow_html=True
     )
 
-img_bg = r"C:\Users\User\OneDrive\Desktop\nyum.png"
+img_bg = r"C:\Users\bayan\OneDrive\Desktop\1.png"
 set_bg(img_bg)
 
 
