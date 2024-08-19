@@ -11,7 +11,7 @@ st.set_page_config(layout="wide",
                    page_title='IdentiLog'
                    )
 
-st.markdown("<h1 style='text-align: center; color: black; background-color: #cfffdd'>I D E N T I L O G</h1>", 
+st.markdown("<h1 style='text-align: center; color: black; background-color: #b8ffbc'>I D E N T I L O G</h1>", 
             unsafe_allow_html=True)
 
 def set_bg(img_path):
@@ -24,17 +24,18 @@ def set_bg(img_path):
         f"""
         <style>
         .stApp {{
-            background: url(data:image/{bg_ext};base64,{encoded_string});
-            background-size: cover
+            background: url(data:image/{bg_ext};base64,{encoded_string})
         }}
         </style>
         """,
         unsafe_allow_html=True
     )
 
-img_bg = r"C:\Users\bayan\OneDrive\Desktop\2.png"
-set_bg(img_bg)
+# img_bg = r"C:\Users\bayan\OneDrive\Desktop\2.png"
+# set_bg(img_bg)
 
+img_bg = r"C:\Users\User\OneDrive\Desktop\identilog_bg.jpg"
+set_bg(img_bg)
 
 menu = option_menu(None, ["home", "upload"], 
     icons=['house', 'cloud-upload'],
@@ -89,7 +90,13 @@ if menu == 'upload':
         "nav-link-selected": {"background-color": "#19c24a"}
     }
 )
-    upload_button = st.file_uploader('upload image', type='jpg')
+    if menu_2 == "one":
+        upload_one = st.file_uploader('Upload Image For Logo Detection', type='jpg')
+    elif menu_2 == "multiple":
+        upload_multiple = st.file_uploader('Upload Image For Logos Detection', type='jpg')
+
+
+        
     # Creating functions:
     def load_model():
         model = tf.keras.models.load_model('D:\Data Related Stuffs\FYP Model\FYP-Group-1\ResNet50.h5')
@@ -106,10 +113,14 @@ if menu == 'upload':
         return img_tensor
 
     # Main function
-        
-    if upload_button:
-        model = load_model()
-        tensor = load_img(upload_button)
-        prediction = model.predict(tensor)
-        pred_class = classes[np.argmax(prediction)]
-        st.write("predicted class:", pred_class)
+    def model_upload(submit_button):
+        if submit_button:
+            model = load_model()
+            tensor = load_img(submit_button)
+            # Upload_one
+            prediction = model.predict(tensor)
+            # Upload_multiple - detect number of cropped images
+            prediction = model.predict(tensor)
+            pred_class = classes[np.argmax(prediction)]
+            st.write("predicted class:", pred_class)
+    
