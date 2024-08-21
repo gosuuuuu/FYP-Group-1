@@ -5,6 +5,10 @@ import numpy as np
 from PIL import Image
 from streamlit_option_menu import option_menu
 import base64
+from logo_identifier import LogoClassfier
+from streamlit_img_label import st_img_label
+from streamlit_cropper import st_cropper
+import os
 
 st.set_page_config(layout="wide",
                    initial_sidebar_state="collapsed",
@@ -82,281 +86,64 @@ if menu == 'upload':
             "period_3m", "period_9m", "mobius_logo", "fsc",
             "ce_marking", "aluminium"]
 
-    st.write('pog') # To insert description
+    st.write('Upload file') # To insert description
+    upload = st.file_uploader('Upload Image For Logo Detection', type='jpg')
     
-    menu_2 = option_menu(None, ["one", "multiple"], 
-    icons=['house', 'cloud-upload'],
-    menu_icon="cast", default_index=0, orientation="horizontal",
-    styles={
-        "container": {"padding": "0!important", 
-                        "background-color": "#cfffdd"},
-        "icon": {"color": "green", 
-                    "font-size": "20px"}, 
-        "nav-link": {"font-size": "14px",
-                        "font-family": "arial" , # to be changed
-                        "text-align": "center", 
-                        "margin":"0px", 
-                        "--hover-color": "#eee"},
-        "nav-link-selected": {"background-color": "#19c24a"}
-    }
-)
-    if menu_2 == "one":
-        upload_one = st.file_uploader('Upload Image For Logo Detection', type='jpg')
-    elif menu_2 == "multiple":
-        upload_multiple = st.file_uploader('Upload Image For Logos Detection', type='jpg')
-        
+    # To uncomment once crop is done
+#     menu_2 = option_menu(None, ["one", "multiple"], 
+#     icons=['house', 'cloud-upload'],
+#     menu_icon="cast", default_index=0, orientation="horizontal",
+#     styles={
+#         "container": {"padding": "0!important", 
+#                         "background-color": "#cfffdd"},
+#         "icon": {"color": "green", 
+#                     "font-size": "20px"}, 
+#         "nav-link": {"font-size": "14px",
+#                         "font-family": "arial" , # to be changed
+#                         "text-align": "center", 
+#                         "margin":"0px", 
+#                         "--hover-color": "#eee"},
+#         "nav-link-selected": {"background-color": "#19c24a"}
+#     }
+# )
+#     if menu_2 == "one":
+#         upload_one = st.file_uploader('Upload Image For Logo Detection', type='jpg')
+#     elif menu_2 == "multiple":
+#         upload_multiple = st.file_uploader('Upload Image For Logos Detection', type='jpg')
     
     
+    # Using Class LogoClassfier from created file
+    # my_prediction = LogoClassfier('D:\Data Related Stuffs\FYP Model\FYP-Group-1\ResNet50.h5')
     
-    # Creating functions:
-    def logo_description(pred_class):
-        if pred_class == "tidyman":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image') # To insert captured image
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') # Insert predicted logo
-            with st.container():
-                st.write('description') # To insert description
-            with st.container():
-                st.write('steps on how to recycle / dispose material') # Insert steps
-                
-        elif pred_class == "plastic_PS":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "plastic_PP":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "plastic_PET":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-
-        elif pred_class == "plastic_PAP":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "plastic_other":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "plastic_LDPE":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "plastic_HDPE":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "period_36m":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "period_24m":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "period_12m":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "period_9m":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "period_6m":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "period_3m":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "mobius_logo":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "fsc":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "ce_marking":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "aluminium":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        else:
-            st.write('Logo undetected! Please try again.')
-            st.write('List of logos that can be detected:')
-            st.write('...') # To make list
-                
+    st.write('test for cropper')
     
-    def load_model():
-        model = tf.keras.models.load_model('D:\Data Related Stuffs\FYP Model\FYP-Group-1\ResNet50.h5')
-        return model
-
-    def load_img (uploaded_file):
-        img = Image.open(uploaded_file)
-        img = img.resize((224,224))
-        img_array = np.array(img)
-        img_tensor = tf.convert_to_tensor(img_array, dtype=tf.float32)
-        img_tensor = img_tensor/255.0
-        img_tensor = tf.expand_dims(img_tensor,
-                                    axis=0)
-        return img_tensor
-
-    # Main function
-    def model_upload(submit_button):
-        if submit_button:
-            model = load_model()
-            tensor = load_img(submit_button)
-            # Upload_one
-            prediction = model.predict(tensor)
+    if upload:
+        img = Image.open(upload)
+        
+        with st.form('Number Form'):
+            number_of_logos = st.number_input('How Many Logos To Detect?',
+                                            min_value = 1,
+                                            step = 1,
+                                            )
+            submit = st.form_submit_button('Submit')
             
-            # Upload_multiple - detect number of cropped images
-            prediction = model.predict(tensor)
-            
-            pred_class = classes[np.argmax(prediction)]
-            st.write("predicted class:", pred_class)
-    
+        cropped_img_list = []
+        
+        for index in range(number_of_logos):
+            cropped_image = st_cropper(img,
+                                    realtime_update = False,
+                                    aspect_ratio = None,
+                                    key = index)
+            cropped_img_list.append(cropped_image)    
+        done = st.checkbox('Done!')
+        
+        if done:
+            st.empty()
+            for cropped_image in cropped_img_list:
+                with st.container(border=True):
+                    column = st.columns(2)
+                    with column[0]:
+                        cropped_image = cropped_image.resize((100,100))
+                        st.image(cropped_image)
+                    with column[1]:
+                        st.write('insert information')

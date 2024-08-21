@@ -251,6 +251,9 @@ class LogoClassfier:
                                     axis=0)
         return img_tensor
     
+    # add function for crop here?
+    
+    
     def model_upload(self, submit_button, menu_2):
         if submit_button:
             tensor = self.load_img(submit_button)
@@ -263,5 +266,3 @@ class LogoClassfier:
             
             pred_class = self.classes[np.argmax(prediction)]
             st.write("predicted class:", pred_class)
-            
-    # add function for crop here?
