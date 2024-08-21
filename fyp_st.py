@@ -65,7 +65,8 @@ menu = option_menu(None, ["home", "upload"],
 
 # Home Page
 if menu == 'home':
-
+    tab1, tab2 = st.tabs(['Description', 'Steps'])
+    
     text1 = st.text_input("Just type anything and I will try to do when I come back to you guys")
     st.write(f"My text: {text1}")
 
