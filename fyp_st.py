@@ -9,6 +9,8 @@ from logo_identifier import LogoClassfier
 from streamlit_img_label import st_img_label
 from streamlit_cropper import st_cropper
 import os
+from streamlit_modal import Modal
+import streamlit.components.v1 as components
 
 st.set_page_config(layout="wide",
                    initial_sidebar_state="collapsed",
@@ -87,8 +89,78 @@ if menu == 'upload':
             "period_3m", "period_9m", "mobius_logo", "fsc",
             "ce_marking", "aluminium"]
 
-    st.write('Upload file') # To insert description
-    upload = st.file_uploader('Upload Image For Logo Detection', type='jpg')
+    st.write('Insert description or text here') # To insert description
+    
+    
+    
+# Main Function with Modal
+
+    # Creating modals
+    modal_number_logos = Modal("Number Of Logos And File",
+                               key = 'modal 1',
+                               max_width=800
+    )
+
+    if 'uploaded_img' not in st.session_state:
+        st.session_state.uploaded_img = None
+    if 'number_logos' not in st.session_state:
+        st.session_state.number_logos = 2
+    if 'cropped_img_list' not in st.session_state:
+        st.session_state.cropped_img_list = []
+
+    # Button
+    with st.container():
+        open_modal = st.button("Open",
+                               use_container_width=True,
+                               help='To upload image')
+        if open_modal:
+            modal_number_logos.open()
+
+    if modal_number_logos.is_open():
+        with modal_number_logos.container():
+            st.session_state.number_logos = st.number_input('Insert',
+                                           min_value=2,
+                                           step=1)
+            st.session_state.uploaded_img = st.file_uploader('Insert File here')
+            done = st.button('done',
+                               use_container_width=True)
+        if done:
+            modal_number_logos.close()    
+        
+    if st.session_state.uploaded_img is not None:
+        img = Image.open(st.session_state.uploaded_img)
+        st.session_state.cropped_img_list = []
+    
+        for index in range(st.session_state.number_logos):
+            cropped_image = st_cropper(img,
+                                    realtime_update = False,
+                                    aspect_ratio = None,
+                                    key = index)
+            st.session_state.cropped_img_list.append(cropped_image)    
+                
+        for cropped_image in st.session_state.cropped_img_list:
+            with st.container(border=True):
+                column = st.columns(2)
+                with column[0]:
+                    cropped_image = cropped_image.resize((100,100))
+                    st.image(cropped_image)
+                with column[1]:
+                    st.write('insert information')           
+            
+
+    #         html_string = '''
+    #         <h1>HTML string in RED</h1>
+
+    #         <script language="javascript">
+    #         document.querySelector("h1").style.color = "red";
+    #         </script>
+    #         '''
+    #         components.html(html_string)
+
+    #         st.write("Some fancy text")
+    #         value = st.checkbox("Check me")
+    #         st.write(f"Checkbox checked: {value}")
+    
     
     # To uncomment once crop is done
 #     menu_2 = option_menu(None, ["one", "multiple"], 
@@ -116,8 +188,9 @@ if menu == 'upload':
     # Using Class LogoClassfier from created file
     # my_prediction = LogoClassfier('D:\Data Related Stuffs\FYP Model\FYP-Group-1\ResNet50.h5')
     
+    st.divider()
     st.write('test for cropper')
-    
+    upload = st.file_uploader('Upload Image For Logo Detection', type='jpg')
     if upload:
         img = Image.open(upload)
         
@@ -139,7 +212,6 @@ if menu == 'upload':
         done = st.checkbox('Done!')
         
         if done:
-            st.empty()
             for cropped_image in cropped_img_list:
                 with st.container(border=True):
                     column = st.columns(2)

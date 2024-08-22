@@ -18,6 +18,32 @@ class LogoClassfier:
                         "period_24m", "period_12m", "period_6m",
                         "period_3m", "period_9m", "mobius_logo", "fsc",
                         "ce_marking", "aluminium"] # 18 classes
+
+    
+    def load_img (self, uploaded_file):
+        img = Image.open(uploaded_file)
+        img = img.resize((224,224))
+        img_array = np.array(img)
+        img_tensor = tf.convert_to_tensor(img_array, dtype=tf.float32)
+        img_tensor = img_tensor/255.0
+        img_tensor = tf.expand_dims(img_tensor,
+                                    axis=0)
+        return img_tensor
+    
+    
+    def model_upload(self, submit_button, menu_2):
+        if submit_button:
+            tensor = self.load_img(submit_button)
+            if menu_2 == "one":
+                prediction = self.model.predict(tensor)
+            
+            # Upload_multiple - detect number of cropped images
+            elif menu_2 == "multiple":
+                prediction = self.model.predict(tensor)
+            
+            pred_class = self.classes[np.argmax(prediction)]
+            st.write("predicted class:", pred_class)
+
     
     def logo_description(self, pred_class):
         if pred_class == "tidyman":
@@ -241,28 +267,4 @@ class LogoClassfier:
             st.write('List of logos that can be detected:')
             st.write('...') # To make list
         
-    def load_img (self, uploaded_file):
-        img = Image.open(uploaded_file)
-        img = img.resize((224,224))
-        img_array = np.array(img)
-        img_tensor = tf.convert_to_tensor(img_array, dtype=tf.float32)
-        img_tensor = img_tensor/255.0
-        img_tensor = tf.expand_dims(img_tensor,
-                                    axis=0)
-        return img_tensor
     
-    # add function for crop here?
-    
-    
-    def model_upload(self, submit_button, menu_2):
-        if submit_button:
-            tensor = self.load_img(submit_button)
-            if menu_2 == "one":
-                prediction = self.model.predict(tensor)
-            
-            # Upload_multiple - detect number of cropped images
-            elif menu_2 == "multiple":
-                prediction = self.model.predict(tensor)
-            
-            pred_class = self.classes[np.argmax(prediction)]
-            st.write("predicted class:", pred_class)
