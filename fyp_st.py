@@ -33,17 +33,18 @@ def set_logo(logo_path):
         <div style="text-align:center;">
              <img src="data:image/png;base64,{encoded_string}" alt="Logo" style="width:300px;">
         </div>
-         """,
+        """,
         unsafe_allow_html=True
     )
 
+logo_path = r"C:\Users\insya\Desktop\Black_BG.png"
+set_logo(logo_path)
+
 # Ena - Saya comment dulu pasal ada error
 # If can kalau dapat insert logo into the file instead of makai path
-# logo_path = r"C:\Users\insya\Desktop\Black_BG.png"
-# set_logo(logo_path)
 
-logo_path_aina = r"C:\Users\User\OneDrive\Desktop\identilog_logo.jpg"
-set_logo(logo_path_aina)
+#logo_path_aina = r"C:\Users\User\OneDrive\Desktop\identilog_logo.jpg"
+#set_logo(logo_path_aina)
 
 #################### BACKGROUND IMAGE ####################
 def set_bg(img_path):
@@ -66,11 +67,11 @@ def set_bg(img_path):
 # img_bg = r"C:\Users\bayan\OneDrive\Desktop\2.png"
 # set_bg(img_bg)
 
-# img_bg = r"C:\Users\insya\Pictures\Wallpaper\Lock Screen.jpg"
-# set_bg(img_bg)
+img_bg = r"C:\Users\insya\Pictures\Wallpaper\Lock Screen.jpg"
+set_bg(img_bg)
 
-img_bg_ena = r"C:\Users\User\OneDrive\Desktop\identilog_bg.jpg"
-set_bg(img_bg_ena)
+#img_bg_ena = r"C:\Users\User\OneDrive\Desktop\identilog_bg.jpg"
+#set_bg(img_bg_ena)
 
 
 #################### OPTION MENU ####################
@@ -93,16 +94,62 @@ menu = option_menu(None, ["home", "upload"],
 
 # Home Page
 if menu == 'home':
-    tab1, tab2 = st.tabs(['Description', 'Steps'])
-    
-    text1 = st.text_input("Just type anything and I will try to do when I come back to you guys")
-    st.write(f"My text: {text1}")
+    tab1, tab2, tab3 = st.tabs(['Description', 'Recycle Logos', 'Contact'])
+
+    with tab1:
+        st.write("This is the Description tab.")
+
+    with tab2:
+        st.write("This is the Recycle Logos tab.")
+
+    with tab3:
+
+        st.header(":envelope: Get In Touch With Us!")
+
+        import streamlit as st
+
+        contact_form = """
+            <style>
+            form {
+                width: 100%;
+            }
+            input[type=text], input[type=email], textarea {
+                width: 100%;
+                padding: 12px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+                margin-top: 6px;
+                margin-bottom: 16px;
+            }
+            textarea {
+                resize: vertical;
+            }
+            button[type=submit] {
+                background-color: #04AA6D;
+                color: white;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            button[type=submit]:hover {
+                background-color: #45a049;
+            }
+            </style>
+            <form action="https://formsubmit.co/YOUREMAIL@EMAIL.COM" method="POST">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="text" name="name" placeholder="Your name" required>
+                <input type="email" name="email" placeholder="Your email" required>
+                <textarea name="message" placeholder="Your message here"></textarea>
+                <button type="submit">Send</button>
+            </form>
+        """
+        st.markdown(contact_form, unsafe_allow_html=True)
 
 # insert description of website
 # how to use upload function steps
 # table of contents with links
-
-
 
 
 # Upload Page
