@@ -18,9 +18,27 @@ st.set_page_config(layout="wide",
                    )
 
 # To be changed
-st.markdown("<h1 style='text-align: center; color: black; background-color: #b8ffbc'>I D E N T I L O G</h1>", 
-            unsafe_allow_html=True)
+#st.markdown("<h1 style='text-align: center; color: black; background-color: #b8ffbc'>I D E N T I L O G</h1>", 
+            #unsafe_allow_html=True)
 
+#################### LOGO ####################
+
+def set_logo(logo_path):
+    
+    with open(logo_path, "rb") as image_file:
+        encoded_string = base64.b64encode(image_file.read()).decode()
+    
+    st.markdown(
+        f"""
+        <div style="text-align:center;">
+             <img src="data:image/png;base64,{encoded_string}" alt="Logo" style="width:300px;">
+        </div>
+         """,
+        unsafe_allow_html=True
+    )
+
+logo_path = r"C:\Users\insya\Desktop\Black_BG.png"
+set_logo(logo_path)
 
 #################### BACKGROUND IMAGE ####################
 def set_bg(img_path):
@@ -43,7 +61,7 @@ def set_bg(img_path):
 # img_bg = r"C:\Users\bayan\OneDrive\Desktop\2.png"
 # set_bg(img_bg)
 
-img_bg = r"C:\Users\User\OneDrive\Desktop\identilog_bg.jpg"
+img_bg = r"C:\Users\insya\Pictures\Wallpaper\Lock Screen.jpg"
 set_bg(img_bg)
 
 
