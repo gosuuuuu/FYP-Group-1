@@ -20,8 +20,7 @@ class LogoClassfier:
                         "ce_marking", "aluminium"] # 18 classes
 
     
-    def load_img (self, uploaded_file):
-        img = Image.open(uploaded_file)
+    def load_img (self, img):
         img = img.resize((224,224))
         img_array = np.array(img)
         img_tensor = tf.convert_to_tensor(img_array, dtype=tf.float32)
@@ -31,240 +30,248 @@ class LogoClassfier:
         return img_tensor
     
     
-    def model_upload(self, submit_button, menu_2):
-        if submit_button:
-            tensor = self.load_img(submit_button)
-            if menu_2 == "one":
-                prediction = self.model.predict(tensor)
-            
-            # Upload_multiple - detect number of cropped images
-            elif menu_2 == "multiple":
-                prediction = self.model.predict(tensor)
-            
+    def model_upload(self, loaded_img):
+            prediction = self.model.predict(loaded_img)
             pred_class = self.classes[np.argmax(prediction)]
-            st.write("predicted class:", pred_class)
 
     
-    def logo_description(self, pred_class):
-        if pred_class == "tidyman":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image') # To insert captured image
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') # Insert predicted logo
-            with st.container():
-                st.write('description') # To insert description
-            with st.container():
-                st.write('steps on how to recycle / dispose material') # Insert steps
-                
-        elif pred_class == "plastic_PS":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "plastic_PP":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "plastic_PET":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
+            if pred_class == "tidyman":
+                with st.container(border=True):
+                    col_logo = st.columns(2)
+                    with col_logo[0]:
+                        st.write('captured image') # To insert captured image
+                    with col_logo[1]:   
+                        st.write('actual logo of prediction') # Insert predicted logo
+                with st.container():
+                    st.write(pred_class)
+                    st.write('description') # To insert description
+                with st.container():
+                    st.write('steps on how to recycle / dispose material') # Insert steps
+                    
+            elif pred_class == "plastic_PS":
+                with st.container(border=True):
+                    col_logo = st.columns(2)
+                    with col_logo[0]:
+                        st.write('captured image')
+                    with col_logo[1]:   
+                        st.write('actual logo of prediction') 
+                with st.container():
+                    st.write(pred_class)
+                    st.write('description') 
+                with st.container():
+                    st.write('steps on how to recycle / dispose material')
+            
+            elif pred_class == "plastic_PP":
+                with st.container(border=True):
+                    col_logo = st.columns(2)
+                    with col_logo[0]:
+                        st.write('captured image')
+                    with col_logo[1]:   
+                        st.write('actual logo of prediction') 
+                with st.container():
+                    st.write(pred_class)
+                    st.write('description') 
+                with st.container():
+                    st.write('steps on how to recycle / dispose material')
+            
+            elif pred_class == "plastic_PET":
+                with st.container(border=True):
+                    col_logo = st.columns(2)
+                    with col_logo[0]:
+                        st.write('captured image')
+                    with col_logo[1]:   
+                        st.write('actual logo of prediction') 
+                with st.container():
+                    st.write(pred_class)
+                    st.write('description') 
+                with st.container():
+                    st.write('steps on how to recycle / dispose material')
 
-        elif pred_class == "plastic_PAP":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "plastic_other":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "plastic_LDPE":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "plastic_HDPE":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "period_36m":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "period_24m":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "period_12m":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "period_9m":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "period_6m":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "period_3m":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "mobius_logo":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "fsc":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "ce_marking":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        elif pred_class == "aluminium":
-            with st.container(border=True):
-                col_logo = st.columns(2)
-                with col_logo[0]:
-                    st.write('captured image')
-                with col_logo[1]:   
-                    st.write('actual logo of prediction') 
-            with st.container():
-                st.write('description') 
-            with st.container():
-                st.write('steps on how to recycle / dispose material')
-        
-        else:
-            st.write('Logo undetected! Please try again.')
-            st.write('List of logos that can be detected:')
-            st.write('...') # To make list
+            elif pred_class == "plastic_PAP":
+                with st.container(border=True):
+                    col_logo = st.columns(2)
+                    with col_logo[0]:
+                        st.write('captured image')
+                    with col_logo[1]:   
+                        st.write('actual logo of prediction') 
+                with st.container():
+                    st.write(pred_class)
+                    st.write('description') 
+                with st.container():
+                    st.write('steps on how to recycle / dispose material')
+            
+            elif pred_class == "plastic_other":
+                with st.container(border=True):
+                    col_logo = st.columns(2)
+                    with col_logo[0]:
+                        st.write('captured image')
+                    with col_logo[1]:   
+                        st.write('actual logo of prediction') 
+                with st.container():
+                    st.write(pred_class)
+                    st.write('description') 
+                with st.container():
+                    st.write('steps on how to recycle / dispose material')
+            
+            elif pred_class == "plastic_LDPE":
+                with st.container(border=True):
+                    col_logo = st.columns(2)
+                    with col_logo[0]:
+                        st.write('captured image')
+                    with col_logo[1]:   
+                        st.write('actual logo of prediction') 
+                with st.container():
+                    st.write(pred_class)
+                    st.write('description') 
+                with st.container():
+                    st.write('steps on how to recycle / dispose material')
+            
+            elif pred_class == "plastic_HDPE":
+                with st.container(border=True):
+                    col_logo = st.columns(2)
+                    with col_logo[0]:
+                        st.write('captured image')
+                    with col_logo[1]:   
+                        st.write('actual logo of prediction') 
+                with st.container():
+                    st.write(pred_class)
+                    st.write('description') 
+                with st.container():
+                    st.write('steps on how to recycle / dispose material')
+            
+            elif pred_class == "period_36m":
+                with st.container(border=True):
+                    col_logo = st.columns(2)
+                    with col_logo[0]:
+                        st.write('captured image')
+                    with col_logo[1]:   
+                        st.write('actual logo of prediction') 
+                with st.container():
+                    st.write(pred_class)
+                    st.write('description') 
+                with st.container():
+                    st.write('steps on how to recycle / dispose material')
+            
+            elif pred_class == "period_24m":
+                with st.container(border=True):
+                    col_logo = st.columns(2)
+                    with col_logo[0]:
+                        st.write('captured image')
+                    with col_logo[1]:   
+                        st.write('actual logo of prediction') 
+                with st.container():
+                    st.write(pred_class)
+                    st.write('description') 
+                with st.container():
+                    st.write('steps on how to recycle / dispose material')
+            
+            elif pred_class == "period_12m":
+                with st.container(border=True):
+                    col_logo = st.columns(2)
+                    with col_logo[0]:
+                        st.write('captured image')
+                    with col_logo[1]:   
+                        st.write('actual logo of prediction') 
+                with st.container():
+                    st.write(pred_class)
+                    st.write('description') 
+                with st.container():
+                    st.write('steps on how to recycle / dispose material')
+            
+            elif pred_class == "period_9m":
+                with st.container(border=True):
+                    col_logo = st.columns(2)
+                    with col_logo[0]:
+                        st.write('captured image')
+                    with col_logo[1]:   
+                        st.write('actual logo of prediction') 
+                with st.container():
+                    st.write(pred_class)
+                    st.write('description') 
+                with st.container():
+                    st.write('steps on how to recycle / dispose material')
+            
+            elif pred_class == "period_6m":
+                with st.container(border=True):
+                    col_logo = st.columns(2)
+                    with col_logo[0]:
+                        st.write('captured image')
+                    with col_logo[1]:   
+                        st.write('actual logo of prediction') 
+                with st.container():
+                    st.write(pred_class)
+                    st.write('description') 
+                with st.container():
+                    st.write('steps on how to recycle / dispose material')
+            
+            elif pred_class == "period_3m":
+                with st.container(border=True):
+                    col_logo = st.columns(2)
+                    with col_logo[0]:
+                        st.write('captured image')
+                    with col_logo[1]:   
+                        st.write('actual logo of prediction') 
+                with st.container():
+                    st.write(pred_class)
+                    st.write('description') 
+                with st.container():
+                    st.write('steps on how to recycle / dispose material')
+            
+            elif pred_class == "mobius_logo":
+                with st.container(border=True):
+                    col_logo = st.columns(2)
+                    with col_logo[0]:
+                        st.write('captured image')
+                    with col_logo[1]:   
+                        st.write('actual logo of prediction') 
+                with st.container():
+                    st.write(pred_class)
+                    st.write('description') 
+                with st.container():
+                    st.write('steps on how to recycle / dispose material')
+            
+            elif pred_class == "fsc":
+                with st.container(border=True):
+                    col_logo = st.columns(2)
+                    with col_logo[0]:
+                        st.write('captured image')
+                    with col_logo[1]:   
+                        st.write('actual logo of prediction') 
+                with st.container():
+                    st.write(pred_class)
+                    st.write('description') 
+                with st.container():
+                    st.write('steps on how to recycle / dispose material')
+            
+            elif pred_class == "ce_marking":
+                with st.container(border=True):
+                    col_logo = st.columns(2)
+                    with col_logo[0]:
+                        st.write('captured image')
+                    with col_logo[1]:   
+                        st.write('actual logo of prediction') 
+                with st.container():
+                    st.write(pred_class)
+                    st.write('description') 
+                with st.container():
+                    st.write('steps on how to recycle / dispose material')
+            
+            elif pred_class == "aluminium":
+                with st.container(border=True):
+                    col_logo = st.columns(2)
+                    with col_logo[0]:
+                        st.write('captured image')
+                    with col_logo[1]:   
+                        st.write('actual logo of prediction') 
+                with st.container():
+                    st.write(pred_class)
+                    st.write('description') 
+                with st.container():
+                    st.write('steps on how to recycle / dispose material')
+            
+            else:
+                st.write('Logo undetected! Please try again.')
+                st.write('List of logos that can be detected:')
+                st.write('...') # To make list
         
     

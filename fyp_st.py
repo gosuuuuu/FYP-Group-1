@@ -37,8 +37,13 @@ def set_logo(logo_path):
         unsafe_allow_html=True
     )
 
-logo_path = r"C:\Users\insya\Desktop\Black_BG.png"
-set_logo(logo_path)
+# Ena - Saya comment dulu pasal ada error
+# If can kalau dapat insert logo into the file instead of makai path
+# logo_path = r"C:\Users\insya\Desktop\Black_BG.png"
+# set_logo(logo_path)
+
+logo_path_aina = r"C:\Users\User\OneDrive\Desktop\identilog_logo.jpg"
+set_logo(logo_path_aina)
 
 #################### BACKGROUND IMAGE ####################
 def set_bg(img_path):
@@ -61,8 +66,11 @@ def set_bg(img_path):
 # img_bg = r"C:\Users\bayan\OneDrive\Desktop\2.png"
 # set_bg(img_bg)
 
-img_bg = r"C:\Users\insya\Pictures\Wallpaper\Lock Screen.jpg"
-set_bg(img_bg)
+# img_bg = r"C:\Users\insya\Pictures\Wallpaper\Lock Screen.jpg"
+# set_bg(img_bg)
+
+img_bg_ena = r"C:\Users\User\OneDrive\Desktop\identilog_bg.jpg"
+set_bg(img_bg_ena)
 
 
 #################### OPTION MENU ####################
@@ -119,6 +127,7 @@ if menu == 'upload':
                                max_width=800
     )
 
+    # Initializing sessions
     if 'uploaded_img' not in st.session_state:
         st.session_state.uploaded_img = None
     if 'number_logos' not in st.session_state:
@@ -137,7 +146,7 @@ if menu == 'upload':
     if modal_number_logos.is_open():
         with modal_number_logos.container():
             st.session_state.number_logos = st.number_input('Insert',
-                                           min_value=2,
+                                           min_value=1,
                                            step=1)
             st.session_state.uploaded_img = st.file_uploader('Insert File here')
             done = st.button('done',
@@ -148,23 +157,32 @@ if menu == 'upload':
     if st.session_state.uploaded_img is not None:
         img = Image.open(st.session_state.uploaded_img)
         st.session_state.cropped_img_list = []
-    
-        for index in range(st.session_state.number_logos):
-            cropped_image = st_cropper(img,
-                                    realtime_update = False,
-                                    aspect_ratio = None,
-                                    key = index)
-            st.session_state.cropped_img_list.append(cropped_image)    
-                
-        for cropped_image in st.session_state.cropped_img_list:
-            with st.container(border=True):
-                column = st.columns(2)
-                with column[0]:
-                    cropped_image = cropped_image.resize((100,100))
-                    st.image(cropped_image)
-                with column[1]:
-                    st.write('insert information')           
+        crop_section = st.empty()
+        
+        with crop_section.container():
+            st.write('Double click on image to save image for crop!')
+            for index in range(st.session_state.number_logos):
+                cropped_image = st_cropper(img,
+                                        realtime_update = False,
+                                        aspect_ratio = None,
+                                        key = index)
+                st.session_state.cropped_img_list.append(cropped_image)    
+            show_img = st.button('Done Cropping !')
+        
+        if show_img:
+            crop_section.empty()
+            display_section = st.empty()
+            my_prediction = LogoClassfier('D:\Data Related Stuffs\FYP Model\FYP-Group-1\ResNet50.h5')
             
+            with display_section.container():
+                for cropped_image in st.session_state.cropped_img_list:
+                    loaded_img = my_prediction.load_img(cropped_image)
+                    
+                    with st.container(border=True):
+                        pred_class = my_prediction.model_upload(loaded_img)       
+    
+    else:
+        st.write('Please upload an image.')
 
     #         html_string = '''
     #         <h1>HTML string in RED</h1>
@@ -205,36 +223,3 @@ if menu == 'upload':
     
     # Using Class LogoClassfier from created file
     # my_prediction = LogoClassfier('D:\Data Related Stuffs\FYP Model\FYP-Group-1\ResNet50.h5')
-    
-    st.divider()
-    st.write('test for cropper')
-    upload = st.file_uploader('Upload Image For Logo Detection', type='jpg')
-    if upload:
-        img = Image.open(upload)
-        
-        with st.form('Number Form'):
-            number_of_logos = st.number_input('How Many Logos To Detect?',
-                                            min_value = 1,
-                                            step = 1,
-                                            )
-            submit = st.form_submit_button('Submit')
-            
-        cropped_img_list = []
-        
-        for index in range(number_of_logos):
-            cropped_image = st_cropper(img,
-                                    realtime_update = False,
-                                    aspect_ratio = None,
-                                    key = index)
-            cropped_img_list.append(cropped_image)    
-        done = st.checkbox('Done!')
-        
-        if done:
-            for cropped_image in cropped_img_list:
-                with st.container(border=True):
-                    column = st.columns(2)
-                    with column[0]:
-                        cropped_image = cropped_image.resize((100,100))
-                        st.image(cropped_image)
-                    with column[1]:
-                        st.write('insert information')
