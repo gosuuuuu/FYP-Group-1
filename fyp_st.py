@@ -97,14 +97,144 @@ if menu == 'home':
     tab1, tab2, tab3 = st.tabs(['Description', 'Recycle Logos', 'Contact'])
 
     with tab1:
-        st.write("This is the Description tab.")
+        st.title("This is the Description tab. \n")
+        st.write("Recycling symbols are used to help us identify different types of packaging and if they are capable of being recycled.  \n"
+         "They can be confusing, so we are here to help you make sense of them and hopefully increase what you recycle in and out of the home.")
+        
 
     with tab2:
-        st.write("This is the Recycle Logos tab.")
+        st.title("This is the Recycle Logos tab.")
+
+        col1, col2, col3, col4 = st.columns(4)
+
+        with col1:
+            st.image(
+                "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/aluminium.png",
+                caption="Sample Image",
+                use_column_width=True
+            )
+
+        with col2:
+            st.subheader("Image Description")
+            st.write(
+                """
+                This is a sample description of the image. 
+                """
+            )
+        with col3:
+            st.image(
+                "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/ce.png",
+                caption="Sample Image",
+                use_column_width=True
+            )
+
+        with col4:
+            st.subheader("Image Description")
+            st.write(
+                """
+                This is a sample description of the image. 
+                """
+            )
+
+        col5, col6, col7, col8 = st.columns(4)
+
+        with col5:
+            st.image(
+                "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/aluminium.png",
+                caption="Sample Image",
+                use_column_width=True
+            )
+
+        with col6:
+            st.subheader("Image Description")
+            st.write(
+                """
+                This is a sample description of the image. 
+                """
+            )
+        
+        with col7:
+            st.image(
+                "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/aluminium.png",
+                caption="Sample Image",
+                use_column_width=True
+            )
+
+        with col8:
+            st.subheader("Image Description")
+            st.write(
+                """
+                This is a sample description of the image. 
+                """
+            )
+
+        col9, col10, col11, col12 = st.columns(4)
+
+        with col9:
+            st.image(
+                "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/aluminium.png",
+                caption="Sample Image",
+                use_column_width=True
+            )
+
+        with col10:
+            st.subheader("Image Description")
+            st.write(
+                """
+                This is a sample description of the image. 
+                """
+            )
+
+        with col11:
+            st.image(
+                "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/aluminium.png",
+                caption="Sample Image",
+                use_column_width=True
+            )
+
+        with col12:
+            st.subheader("Image Description")
+            st.write(
+                """
+                This is a sample description of the image. 
+                """
+            )
+
+        col13, col14, col15, col16 = st.columns(4)
+
+        with col13:
+            st.image(
+                "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/aluminium.png",
+                caption="Sample Image",
+                use_column_width=True
+            )
+
+        with col14:
+            st.subheader("Image Description")
+            st.write(
+                """
+                This is a sample description of the image. 
+                """
+            )
+
+        with col15:
+            st.image(
+                "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/aluminium.png",
+                caption="Sample Image",
+                use_column_width=True
+            )
+
+        with col16:
+            st.subheader("Image Description")
+            st.write(
+                """
+                This is a sample description of the image. 
+                """
+            )
 
     with tab3:
 
-        st.header(":envelope: Get In Touch With Us!")
+        st.title(":envelope: Get In Touch With Us!")
 
         import streamlit as st
 
