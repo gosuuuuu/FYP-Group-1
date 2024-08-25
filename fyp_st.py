@@ -17,58 +17,104 @@ st.set_page_config(layout="wide",
                    page_title='IdentiLog'
                    )
 
+
+def black_font():
+    st.markdown(
+        """ <style>
+        * {color: black !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+black_font()
+
 # To be changed
 #st.markdown("<h1 style='text-align: center; color: black; background-color: #b8ffbc'>I D E N T I L O G</h1>", 
             #unsafe_allow_html=True)
 
 #################### LOGO ####################
 
-def set_logo(logo_path):
-    
-    with open(logo_path, "rb") as image_file:
-        encoded_string = base64.b64encode(image_file.read()).decode()
-    
+# Using URL #
+import streamlit as st
+
+def set_logo(logo_url):
     st.markdown(
         f"""
         <div style="text-align:center;">
-             <img src="data:image/png;base64,{encoded_string}" alt="Logo" style="width:300px;">
+             <img src="{logo_url}" alt="Logo" style="width:300px;">
         </div>
         """,
         unsafe_allow_html=True
     )
 
-logo_path = r"C:\Users\insya\Desktop\Black_BG.png"
-set_logo(logo_path)
+logo_url = "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Logo%20and%20Background/BlackFontBG.png"
+set_logo(logo_url)
 
-# Ena - Saya comment dulu pasal ada error
-# If can kalau dapat insert logo into the file instead of makai path
+# Using Local #
 
-#logo_path_aina = r"C:\Users\User\OneDrive\Desktop\identilog_logo.jpg"
-#set_logo(logo_path_aina)
+# def set_logo(logo_path):
+    
+#     with open(logo_path, "rb") as image_file:
+#         encoded_string = base64.b64encode(image_file.read()).decode()
+    
+#     st.markdown(
+#         f"""
+#         <div style="text-align:center;">
+#              <img src="data:image/png;base64,{encoded_string}" alt="Logo" style="width:300px;">
+#         </div>
+#         """,
+#         unsafe_allow_html=True
+#     )
+
+# logo_path = r"C:\Users\insya\Desktop\Black_BG.png"
+# set_logo(logo_path)
 
 #################### BACKGROUND IMAGE ####################
-def set_bg(img_path):
-    bg_ext = 'png'
-    
-    with open(img_path, "rb") as image_file:
-        encoded_string = base64.b64encode(image_file.read()).decode()
-    
+
+# Using URL #
+
+def set_bg(img_url):
     st.markdown(
         f"""
         <style>
         .stApp {{
-            background: url(data:image/{bg_ext};base64,{encoded_string})
+            background: url({img_url});
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }}
         </style>
         """,
         unsafe_allow_html=True
     )
 
-# img_bg = r"C:\Users\bayan\OneDrive\Desktop\2.png"
-# set_bg(img_bg)
+img_url = "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Logo%20and%20Background/Background%20.png"
+set_bg(img_url)
 
-img_bg = r"C:\Users\insya\Pictures\Wallpaper\Lock Screen.jpg"
-set_bg(img_bg)
+
+# Using Lokal #
+
+# def set_bg(img_path):
+#     bg_ext = 'png'
+    
+#     with open(img_path, "rb") as image_file:
+#         encoded_string = base64.b64encode(image_file.read()).decode()
+    
+#     st.markdown(
+#         f"""
+#         <style>
+#         .stApp {{
+#             background: url(data:image/{bg_ext};base64,{encoded_string})
+#         }}
+#         </style>
+#         """,
+#         unsafe_allow_html=True
+#     )
+
+# img_bg = r"C:\Users\insya\Pictures\Wallpaper\Lock Screen.jpg"
+# set_bg(img_bg)
 
 #img_bg_ena = r"C:\Users\User\OneDrive\Desktop\identilog_bg.jpg"
 #set_bg(img_bg_ena)
@@ -103,134 +149,167 @@ if menu == 'home':
         
 
     with tab2:
-        st.title("This is the Recycle Logos tab.")
+        st.title("This is the Recycle Logos tab \n")
+        st.write("Few logos that included in the project")
 
-        col1, col2, col3, col4 = st.columns(4)
+        st.markdown(
+            """
+            <style>
+            .col-container {
+                display: flex;
+                align-items: center;
+            }
+            .col-container .col {
+                margin-right: 1000px;  /* Adjust this value to increase or decrease spacing between columns */
+            }
+            .col-container .col:last-child {
+                margin-right: 100px;  /* No margin for the last column */
+            }
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
 
-        with col1:
-            st.image(
-                "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/aluminium.png",
-                caption="Sample Image",
-                use_column_width=True
-            )
+        with st.container():
+            st.markdown('<div class="col-container">', unsafe_allow_html=True)
 
-        with col2:
-            st.subheader("Image Description")
-            st.write(
-                """
-                This is a sample description of the image. 
-                """
-            )
-        with col3:
-            st.image(
-                "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/ce.png",
-                caption="Sample Image",
-                use_column_width=True
-            )
+            col1, col2, col3, col4 = st.columns([1,2,3,4])
 
-        with col4:
-            st.subheader("Image Description")
-            st.write(
-                """
-                This is a sample description of the image. 
-                """
-            )
+            with col1:
+                st.image(
+                    "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/aluminium.png",
+                    caption="Aluminium Logo",
+                    use_column_width=False,
+                    width=200,           
+                )
 
-        col5, col6, col7, col8 = st.columns(4)
+            with col2:
+                st.subheader("Aluminium")
+                st.write(
+                    """
+                    This is a sample description of the image. 
+                    """
+                )
 
-        with col5:
-            st.image(
-                "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/aluminium.png",
-                caption="Sample Image",
-                use_column_width=True
-            )
+            with col3:
+                st.image(
+                    "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/ce.png",
+                    caption="CE logo",
+                    use_column_width=False,
+                    width=250,  
+                )
 
-        with col6:
-            st.subheader("Image Description")
-            st.write(
-                """
-                This is a sample description of the image. 
-                """
-            )
-        
-        with col7:
-            st.image(
-                "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/aluminium.png",
-                caption="Sample Image",
-                use_column_width=True
-            )
+            with col4:
+                st.subheader("CE")
+                st.write(
+                    """
+                    This is a sample description of the image. 
+                    """
+                )
+            
+            st.markdown('</div>', unsafe_allow_html=True)
 
-        with col8:
-            st.subheader("Image Description")
-            st.write(
-                """
-                This is a sample description of the image. 
-                """
-            )
+            col5, col6, col7, col8 = st.columns(4)
 
-        col9, col10, col11, col12 = st.columns(4)
+            with col5:
+                st.image(
+                    "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/fsc.png",
+                    caption="FSC Logo",
+                    use_column_width=False,
+                    width=200,  
+                )
 
-        with col9:
-            st.image(
-                "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/aluminium.png",
-                caption="Sample Image",
-                use_column_width=True
-            )
+            with col6:
+                st.subheader("FSC")
+                st.write(
+                    """
+                    This is a sample description of the image. 
+                    """
+                )
+            
+            with col7:
+                st.image(
+                    "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/mobiusloop.png",
+                    caption="Mobius Loop Logo",
+                    use_column_width=False,
+                    width=200,  
+                )
 
-        with col10:
-            st.subheader("Image Description")
-            st.write(
-                """
-                This is a sample description of the image. 
-                """
-            )
+            with col8:
+                st.subheader("Mobius Loop")
+                st.write(
+                    """
+                    This is a sample description of the image. 
+                    """
+                )
 
-        with col11:
-            st.image(
-                "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/aluminium.png",
-                caption="Sample Image",
-                use_column_width=True
-            )
+            col9, col10, col11, col12 = st.columns(4)
 
-        with col12:
-            st.subheader("Image Description")
-            st.write(
-                """
-                This is a sample description of the image. 
-                """
-            )
+            with col9:
+                st.image(
+                    "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/pao.png",
+                    caption="Period After Opening Logo",
+                    use_column_width=False,
+                    width=200,  
+                )
 
-        col13, col14, col15, col16 = st.columns(4)
+            with col10:
+                st.subheader("Period After Opening")
+                st.write(
+                    """
+                    This is a sample description of the image. 
+                    """
+                )
 
-        with col13:
-            st.image(
-                "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/aluminium.png",
-                caption="Sample Image",
-                use_column_width=True
-            )
+            with col11:
+                st.image(
+                    "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/plastic.png",
+                    caption="Plastic Logo",
+                    use_column_width=False,
+                    width=200,  
+                )
 
-        with col14:
-            st.subheader("Image Description")
-            st.write(
-                """
-                This is a sample description of the image. 
-                """
-            )
+            with col12:
+                st.subheader("Plastic")
+                st.write(
+                    """
+                    This is a sample description of the image. 
+                    """
+                )
 
-        with col15:
-            st.image(
-                "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/aluminium.png",
-                caption="Sample Image",
-                use_column_width=True
-            )
+            col13, col14, col15, col16 = st.columns(4)
 
-        with col16:
-            st.subheader("Image Description")
-            st.write(
-                """
-                This is a sample description of the image. 
-                """
-            )
+            with col13:
+                st.image(
+                    "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/tidyman.png",
+                    caption="Tidyman Logo",
+                    use_column_width=False,
+                    width=200,  
+                )
+
+            with col14:
+                st.subheader("Tidyman")
+                st.write(
+                    """
+                    This is a sample description of the image. 
+                    """
+                )
+
+            with col15:
+                st.image(
+                    "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/waste.png",
+                    caption="Electric Waste and Battery Logo",
+                    use_column_width=False,
+                    width=200,  
+                )
+
+            with col16:
+                st.subheader("Electric Waste and Battery")
+                st.write(
+                    """
+                    This is a sample description of the image. 
+                    """
+                )
 
     with tab3:
 
@@ -251,6 +330,7 @@ if menu == 'home':
                 box-sizing: border-box;
                 margin-top: 6px;
                 margin-bottom: 16px;
+                background-color: #FFFFFF;
             }
             textarea {
                 resize: vertical;
