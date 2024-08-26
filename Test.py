@@ -1,99 +1,78 @@
 import streamlit as st
 
-# Set Streamlit layout to wide
-st.set_page_config(layout="wide")
+# Set page configuration
+st.set_page_config(page_title="Top Sidebar Example", layout="wide")
 
-# Initialize session state for page selection if not already set
-if 'page' not in st.session_state:
-    st.session_state.page = 'home'
-
-# Define the HTML for the navigation bar
+# Custom CSS for top "sidebar" styling
 st.markdown("""
     <style>
-    /* Navigation bar styling */
-    .topnav {
-        background-color: #333; /* Dark background */
-        width: 100vw; /* Full viewport width */
-        position: fixed; /* Fix it to the top */
-        top: 1; /* Align it to the top of the screen */
-        left: 0; /* Align it to the left edge of the screen */
-        z-index: 1000; /* Ensure it is above other content */
+    .top-bar {
+        background-color: #588157;
+        padding: 0;
+        margin: 0;
+        position: fixed;
+        top: 0.5;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 9999;
+        border-bottom: 2px solid #e0e0e0;
         display: flex;
-        justify-content: center; /* Center the links */
-        box-sizing: border-box; /* Ensure padding is included in width */
-        padding: 10px 0; /* Add padding for better spacing */
+        justify-content: space-around;
     }
-
-    .topnav button {
-        color: white; /* White text */
-        background-color: #333; /* Dark background */
-        border: none;
-        padding: 14px 20px;
-        font-size: 17px;
-        cursor: pointer;
-        margin: 0 5px; /* Space between buttons */
-        border-radius: 5px; /* Rounded corners */
+    .top-bar a {
+        padding: 15px;
+        text-decoration: none;
+        color: #000;
+        font-weight: bold;
+        flex: 1;
+        text-align: center;
     }
-
-    .topnav button:hover {
-        background-color: #ddd;
-        color: black;
+    .top-bar a:hover {
+        color: #DAD7CD;
     }
-
-    .topnav button.active {
-        background-color: #04AA6D;
-        color: white;
-    }
-
-    /* Ensure content is not hidden behind the nav bar */
-    .main-content {
-        margin-top: 70px; /* Adjust based on nav bar height */
+    .container {
+        margin-top: 60px;  /* Offset for the top bar */
+        padding: 20px;
     }
     </style>
-    <div class="topnav">
-        <button id="home-btn" onclick="location.href='?page=home'">Home</button>
-        <button id="about-btn" onclick="location.href='?page=about'">About</button>
-        <button id="contact-btn" onclick="location.href='?page=contact'">Contact</button>
+""", unsafe_allow_html=True)
+
+# Top "sidebar"
+st.markdown("""
+    <div class="top-bar">
+        <a href="?page=home">Home</a>
+        <a href="?page=upload">Upload</a>
+        <a href="?page=description">Description</a>
+        <a href="?page=recycle-logos">Recycle Logos</a>
+        <a href="?page=contact">Contact</a>
     </div>
-    <script>
-    // Function to update the active button based on the URL query parameter
-    function updateActiveButton() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const page = urlParams.get('page') || 'home';
-        document.querySelectorAll('.topnav button').forEach(button => {
-            button.classList.remove('active');
-        });
-        const activeButton = document.querySelector(`#${page}-btn`);
-        if (activeButton) {
-            activeButton.classList.add('active');
-        }
-    }
+""", unsafe_allow_html=True)
 
-    // Set the active button on page load and query parameter change
-    window.addEventListener('load', updateActiveButton);
-    window.addEventListener('popstate', updateActiveButton);
-    </script>
-    """, unsafe_allow_html=True)
-
-# Handle page selection using Streamlit
+# Get the query parameters
 query_params = st.query_params
-if 'page' in query_params:
-    st.session_state.page = query_params['page'][0]
+page = query_params.get("page", "home")
 
-# Main content
-st.markdown("<div class='main-content'>", unsafe_allow_html=True)
+# Content for each page
+if page == "home":
+    st.title("Home")
+    st.write("Welcome to the Home page!")
 
-if st.session_state.page == "home":
-    st.title("Home Page")
-    st.write("Welcome to the Home Page!")
-elif st.session_state.page == "about":
-    st.title("About Page")
-    st.write("This is the About Page!")
-elif st.session_state.page == "contact":
-    st.title("Contact Page")
-    st.write("This is the Contact Page!")
-else:
-    st.title("Home Page")
-    st.write("Welcome to the Home Page!")
+elif page == "upload":
+    st.title("Upload")
+    st.write("Upload your files here.")
 
-st.markdown("</div>", unsafe_allow_html=True)
+elif page == "description":
+    st.title("Description")
+    st.write("This is the description page.")
+
+elif page == "recycle-logos":
+    st.title("Recycle Logos")
+    st.write("Information about recycling logos.")
+
+elif page == "contact":
+    st.title("Contact")
+    st.write("Contact us here.")
+
+# Additional container styling
+st.markdown('<div class="container">', unsafe_allow_html=True)
