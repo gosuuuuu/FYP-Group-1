@@ -22,6 +22,7 @@ def black_font():
     st.markdown(
         """ <style>
         * {color: black !important;
+        font-size: 23px !important;
         }
         </style>
         """,
@@ -173,7 +174,7 @@ if menu == 'home':
         with st.container():
             st.markdown('<div class="col-container">', unsafe_allow_html=True)
 
-            col1, col2, col3, col4 = st.columns([1,2,3,4])
+            col1, col2, col3, col4 = st.columns([3, 4, 3, 4])
 
             with col1:
                 st.image(
@@ -208,6 +209,7 @@ if menu == 'home':
                 )
             
             st.markdown('</div>', unsafe_allow_html=True)
+            st.divider()
 
             col5, col6, col7, col8 = st.columns(4)
 
@@ -436,47 +438,7 @@ if menu == 'upload':
                     loaded_img = my_prediction.load_img(cropped_image)
                     
                     with st.container(border=True):
-                        pred_class = my_prediction.model_upload(loaded_img)       
+                        pred_class = my_prediction.model_upload(cropped_image, loaded_img)       
     
     else:
         st.write('Please upload an image.')
-
-    #         html_string = '''
-    #         <h1>HTML string in RED</h1>
-
-    #         <script language="javascript">
-    #         document.querySelector("h1").style.color = "red";
-    #         </script>
-    #         '''
-    #         components.html(html_string)
-
-    #         st.write("Some fancy text")
-    #         value = st.checkbox("Check me")
-    #         st.write(f"Checkbox checked: {value}")
-    
-    
-    # To uncomment once crop is done
-#     menu_2 = option_menu(None, ["one", "multiple"], 
-#     icons=['house', 'cloud-upload'],
-#     menu_icon="cast", default_index=0, orientation="horizontal",
-#     styles={
-#         "container": {"padding": "0!important", 
-#                         "background-color": "#cfffdd"},
-#         "icon": {"color": "green", 
-#                     "font-size": "20px"}, 
-#         "nav-link": {"font-size": "14px",
-#                         "font-family": "arial" , # to be changed
-#                         "text-align": "center", 
-#                         "margin":"0px", 
-#                         "--hover-color": "#eee"},
-#         "nav-link-selected": {"background-color": "#19c24a"}
-#     }
-# )
-#     if menu_2 == "one":
-#         upload_one = st.file_uploader('Upload Image For Logo Detection', type='jpg')
-#     elif menu_2 == "multiple":
-#         upload_multiple = st.file_uploader('Upload Image For Logos Detection', type='jpg')
-    
-    
-    # Using Class LogoClassfier from created file
-    # my_prediction = LogoClassfier('D:\Data Related Stuffs\FYP Model\FYP-Group-1\ResNet50.h5')

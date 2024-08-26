@@ -30,7 +30,7 @@ class LogoClassfier:
         return img_tensor
     
     
-    def model_upload(self, loaded_img):
+    def model_upload(self, cropped_image, loaded_img):
             prediction = self.model.predict(loaded_img)
             pred_class = self.classes[np.argmax(prediction)]
 
@@ -40,6 +40,7 @@ class LogoClassfier:
                     col_logo = st.columns(2)
                     with col_logo[0]:
                         st.write('captured image') # To insert captured image
+                        st.image(cropped_image)
                     with col_logo[1]:   
                         st.write('actual logo of prediction') # Insert predicted logo
                 with st.container():
@@ -53,6 +54,7 @@ class LogoClassfier:
                     col_logo = st.columns(2)
                     with col_logo[0]:
                         st.write('captured image')
+                        st.image(cropped_image)
                     with col_logo[1]:   
                         st.write('actual logo of prediction') 
                 with st.container():
@@ -66,6 +68,7 @@ class LogoClassfier:
                     col_logo = st.columns(2)
                     with col_logo[0]:
                         st.write('captured image')
+                        st.image(cropped_image)
                     with col_logo[1]:   
                         st.write('actual logo of prediction') 
                 with st.container():
@@ -79,6 +82,7 @@ class LogoClassfier:
                     col_logo = st.columns(2)
                     with col_logo[0]:
                         st.write('captured image')
+                        st.image(cropped_image)
                     with col_logo[1]:   
                         st.write('actual logo of prediction') 
                 with st.container():
@@ -92,6 +96,7 @@ class LogoClassfier:
                     col_logo = st.columns(2)
                     with col_logo[0]:
                         st.write('captured image')
+                        st.image(cropped_image)
                     with col_logo[1]:   
                         st.write('actual logo of prediction') 
                 with st.container():
@@ -105,6 +110,7 @@ class LogoClassfier:
                     col_logo = st.columns(2)
                     with col_logo[0]:
                         st.write('captured image')
+                        st.image(cropped_image)
                     with col_logo[1]:   
                         st.write('actual logo of prediction') 
                 with st.container():
@@ -118,6 +124,7 @@ class LogoClassfier:
                     col_logo = st.columns(2)
                     with col_logo[0]:
                         st.write('captured image')
+                        st.image(cropped_image)
                     with col_logo[1]:   
                         st.write('actual logo of prediction') 
                 with st.container():
@@ -131,6 +138,7 @@ class LogoClassfier:
                     col_logo = st.columns(2)
                     with col_logo[0]:
                         st.write('captured image')
+                        st.image(cropped_image)
                     with col_logo[1]:   
                         st.write('actual logo of prediction') 
                 with st.container():
@@ -144,6 +152,7 @@ class LogoClassfier:
                     col_logo = st.columns(2)
                     with col_logo[0]:
                         st.write('captured image')
+                        st.image(cropped_image)
                     with col_logo[1]:   
                         st.write('actual logo of prediction') 
                 with st.container():
@@ -157,6 +166,7 @@ class LogoClassfier:
                     col_logo = st.columns(2)
                     with col_logo[0]:
                         st.write('captured image')
+                        st.image(cropped_image)
                     with col_logo[1]:   
                         st.write('actual logo of prediction') 
                 with st.container():
@@ -170,6 +180,7 @@ class LogoClassfier:
                     col_logo = st.columns(2)
                     with col_logo[0]:
                         st.write('captured image')
+                        st.image(cropped_image)
                     with col_logo[1]:   
                         st.write('actual logo of prediction') 
                 with st.container():
@@ -183,6 +194,7 @@ class LogoClassfier:
                     col_logo = st.columns(2)
                     with col_logo[0]:
                         st.write('captured image')
+                        st.image(cropped_image)
                     with col_logo[1]:   
                         st.write('actual logo of prediction') 
                 with st.container():
@@ -196,6 +208,7 @@ class LogoClassfier:
                     col_logo = st.columns(2)
                     with col_logo[0]:
                         st.write('captured image')
+                        st.image(cropped_image)
                     with col_logo[1]:   
                         st.write('actual logo of prediction') 
                 with st.container():
@@ -209,6 +222,7 @@ class LogoClassfier:
                     col_logo = st.columns(2)
                     with col_logo[0]:
                         st.write('captured image')
+                        st.image(cropped_image)
                     with col_logo[1]:   
                         st.write('actual logo of prediction') 
                 with st.container():
@@ -222,6 +236,7 @@ class LogoClassfier:
                     col_logo = st.columns(2)
                     with col_logo[0]:
                         st.write('captured image')
+                        st.image(cropped_image)
                     with col_logo[1]:   
                         st.write('actual logo of prediction') 
                 with st.container():
@@ -235,6 +250,7 @@ class LogoClassfier:
                     col_logo = st.columns(2)
                     with col_logo[0]:
                         st.write('captured image')
+                        st.image(cropped_image)
                     with col_logo[1]:   
                         st.write('actual logo of prediction') 
                 with st.container():
@@ -248,19 +264,21 @@ class LogoClassfier:
                     col_logo = st.columns(2)
                     with col_logo[0]:
                         st.write('captured image')
+                        st.image(cropped_image)
                     with col_logo[1]:   
                         st.write('actual logo of prediction') 
                 with st.container():
-                    st.write(pred_class)
-                    st.write('This logo indicates conformity with health, safety, and environmental protection standards for products sold within the European Economic Area. this is not a recycling logo.') 
-                with st.container():
-                    st.write('steps on how to recycle / dispose material please follow local disposal guidelines. ')
-            
+                    with st.expander('meow'):
+                        st.write(pred_class)
+                        st.write('This logo indicates conformity with health, safety, and environmental protection standards for products sold within the European Economic Area. this is not a recycling logo.') 
+                        st.write('steps on how to recycle / dispose material please follow local disposal guidelines. ')
+                
             elif pred_class == "aluminium":
                 with st.container(border=True):
                     col_logo = st.columns(2)
                     with col_logo[0]:
                         st.write('captured image')
+                        st.image(cropped_image)
                     with col_logo[1]:   
                         st.write('actual logo of prediction') 
                 with st.container():
