@@ -187,7 +187,7 @@ if menu == 'home':
                 st.subheader("Aluminium")
                 st.write(
                     """
-                    This is a sample description of the image. 
+                    The Recyclable Aluminium Recyclable Aluminium Indicates that the item is made from aluminum, a highly recyclable material.  
                     """
                 )
 
@@ -203,7 +203,7 @@ if menu == 'home':
                 st.subheader("CE")
                 st.write(
                     """
-                    This is a sample description of the image. 
+                    This indicates conformity with health, safety, and environmental protection standards for products sold within the European Economic Area.  
                     """
                 )
             
@@ -223,7 +223,7 @@ if menu == 'home':
                 st.subheader("FSC")
                 st.write(
                     """
-                    This is a sample description of the image. 
+                    This certifies that the wood or paper products come from responsibly managed forests.  
                     """
                 )
             
@@ -239,7 +239,7 @@ if menu == 'home':
                 st.subheader("Mobius Loop")
                 st.write(
                     """
-                    This is a sample description of the image. 
+                    This represents that the product is recyclable.  
                     """
                 )
 
@@ -257,7 +257,7 @@ if menu == 'home':
                 st.subheader("Period After Opening")
                 st.write(
                     """
-                    This is a sample description of the image. 
+                    The period-after-opening (PAO) symbol highlights the amount of time a cosmetic product will remain safe for use after being opened for the first time. It depicts an open cosmetics pot and is used together with a written number of months or years.  
                     """
                 )
 
@@ -273,7 +273,7 @@ if menu == 'home':
                 st.subheader("Plastic")
                 st.write(
                     """
-                    This is a sample description of the image. 
+                    These symbols help consumers to identify different types of plastic resin used to make the product.They were applied to help assist with the sorting of plastics. Like many materials plastics should be recycled separately, so the value of the of the recycled material is preserved. Allowing it to be reused to make new products.  
                     """
                 )
 
@@ -291,7 +291,7 @@ if menu == 'home':
                 st.subheader("Tidyman")
                 st.write(
                     """
-                    This is a sample description of the image. 
+                    A symbol encouraging proper waste disposal.  
                     """
                 )
 
@@ -307,7 +307,7 @@ if menu == 'home':
                 st.subheader("Electric Waste and Battery")
                 st.write(
                     """
-                    This is a sample description of the image. 
+                    he crossed-out wheelie bin symbol on your electrical product, batteries, or their packaging, reminds you that all electrical and electronic products and batteries must be recycled through either a recycling centre or with retailers. 
                     """
                 )
 

@@ -44,9 +44,9 @@ class LogoClassfier:
                         st.write('actual logo of prediction') # Insert predicted logo
                 with st.container():
                     st.write(pred_class)
-                    st.write('description') # To insert description
+                    st.write('A symbol encouraging proper waste disposal. ') # To insert description
                 with st.container():
-                    st.write('steps on how to recycle / dispose material') # Insert steps
+                    st.write('as this symbol is to encourage the buyer , it is not applicable; this is not a recycling logo. therefore dispose of waste responsibly in the appropriate bin.  ') # Insert steps
                     
             elif pred_class == "plastic_PS":
                 with st.container(border=True):
@@ -57,9 +57,9 @@ class LogoClassfier:
                         st.write('actual logo of prediction') 
                 with st.container():
                     st.write(pred_class)
-                    st.write('description') 
+                    st.write('Often used for disposable cutlery and foam containers. It is not easily recyclable.') 
                 with st.container():
-                    st.write('steps on how to recycle / dispose material')
+                    st.write('As it is not easily recyclabl, You may Dispose of it in a general waste. ')
             
             elif pred_class == "plastic_PP":
                 with st.container(border=True):
@@ -70,9 +70,9 @@ class LogoClassfier:
                         st.write('actual logo of prediction') 
                 with st.container():
                     st.write(pred_class)
-                    st.write('description') 
+                    st.write('A Recycable plastic used for containers, straws, and some packaging.') 
                 with st.container():
-                    st.write('steps on how to recycle / dispose material')
+                    st.write('Rinse and place in the recycling bin. ')
             
             elif pred_class == "plastic_PET":
                 with st.container(border=True):
@@ -83,7 +83,7 @@ class LogoClassfier:
                         st.write('actual logo of prediction') 
                 with st.container():
                     st.write(pred_class)
-                    st.write('description') 
+                    st.write('A Recycable plastic used for containers, straws, and some packaging.') 
                 with st.container():
                     st.write('steps on how to recycle / dispose material')
 
@@ -96,9 +96,9 @@ class LogoClassfier:
                         st.write('actual logo of prediction') 
                 with st.container():
                     st.write(pred_class)
-                    st.write('description') 
+                    st.write('Depends on local facilities it is recycable , it is used in various applications, including textiles and packaging. ') 
                 with st.container():
-                    st.write('steps on how to recycle / dispose material')
+                    st.write('If not recyclable, dispose of in general waste. ')
             
             elif pred_class == "plastic_other":
                 with st.container(border=True):
@@ -109,9 +109,9 @@ class LogoClassfier:
                         st.write('actual logo of prediction') 
                 with st.container():
                     st.write(pred_class)
-                    st.write('description') 
+                    st.write('Depends on the specific type; check local guidelines it is recycable. This logo covers various types of plastic that do not fit into the other categories.  ') 
                 with st.container():
-                    st.write('steps on how to recycle / dispose material')
+                    st.write('If not recyclable, dispose of in general waste. ')
             
             elif pred_class == "plastic_LDPE":
                 with st.container(border=True):
@@ -122,9 +122,9 @@ class LogoClassfier:
                         st.write('actual logo of prediction') 
                 with st.container():
                     st.write(pred_class)
-                    st.write('description') 
+                    st.write('Often used for plastic bags and some containers. Yes it is recycable, but only at specific facilities. ') 
                 with st.container():
-                    st.write('steps on how to recycle / dispose material')
+                    st.write('Take to grocery stores that accept plastic bags. ')
             
             elif pred_class == "plastic_HDPE":
                 with st.container(border=True):
@@ -135,9 +135,9 @@ class LogoClassfier:
                         st.write('actual logo of prediction') 
                 with st.container():
                     st.write(pred_class)
-                    st.write('description') 
+                    st.write('Commonly used for containers like milk jugs and detergent bottles. Yes, it is recycable ') 
                 with st.container():
-                    st.write('steps on how to recycle / dispose material')
+                    st.write('Rinse and place in the recycling bin. ')
             
             elif pred_class == "period_36m":
                 with st.container(border=True):
@@ -148,7 +148,7 @@ class LogoClassfier:
                         st.write('actual logo of prediction') 
                 with st.container():
                     st.write(pred_class)
-                    st.write('description') 
+                    st.write('This logo indicates the product should be used within thirty-six months after opening. Depending on the material it is recycable') 
                 with st.container():
                     st.write('steps on how to recycle / dispose material')
             
@@ -161,9 +161,9 @@ class LogoClassfier:
                         st.write('actual logo of prediction') 
                 with st.container():
                     st.write(pred_class)
-                    st.write('description') 
+                    st.write('This logo Indicates the product should be used within twenty-four months after opening. Depending on the material it is recycable') 
                 with st.container():
-                    st.write('steps on how to recycle / dispose material')
+                    st.write('Check specific material guidelines. ')
             
             elif pred_class == "period_12m":
                 with st.container(border=True):
@@ -174,9 +174,9 @@ class LogoClassfier:
                         st.write('actual logo of prediction') 
                 with st.container():
                     st.write(pred_class)
-                    st.write('description') 
+                    st.write('This logo indicates the product should be used within twelve months after opening. Depending on the material it is recycable') 
                 with st.container():
-                    st.write('steps on how to recycle / dispose material')
+                    st.write('Check specific material guidelines. ')
             
             elif pred_class == "period_9m":
                 with st.container(border=True):
@@ -187,9 +187,9 @@ class LogoClassfier:
                         st.write('actual logo of prediction') 
                 with st.container():
                     st.write(pred_class)
-                    st.write('description') 
+                    st.write('This logo indicates the product should be used within nine months after opening. Depending on the material it is recycable') 
                 with st.container():
-                    st.write('steps on how to recycle / dispose material')
+                    st.write('Check specific material guidelines. ')
             
             elif pred_class == "period_6m":
                 with st.container(border=True):
@@ -200,9 +200,9 @@ class LogoClassfier:
                         st.write('actual logo of prediction') 
                 with st.container():
                     st.write(pred_class)
-                    st.write('description') 
+                    st.write('This logo indicates the product should be used within six months after opening. Depending on the material it is recycable') 
                 with st.container():
-                    st.write('steps on how to recycle / dispose material')
+                    st.write('Check specific material guidelines. ')
             
             elif pred_class == "period_3m":
                 with st.container(border=True):
@@ -213,9 +213,9 @@ class LogoClassfier:
                         st.write('actual logo of prediction') 
                 with st.container():
                     st.write(pred_class)
-                    st.write('description') 
+                    st.write('This logo indicates the product should be used within three months after opening. Depending on the material it is recycable') 
                 with st.container():
-                    st.write('steps on how to recycle / dispose material')
+                    st.write('Check specific material guidelines.')
             
             elif pred_class == "mobius_logo":
                 with st.container(border=True):
@@ -226,9 +226,9 @@ class LogoClassfier:
                         st.write('actual logo of prediction') 
                 with st.container():
                     st.write(pred_class)
-                    st.write('description') 
+                    st.write('This logo represents that the product is recyclable. ') 
                 with st.container():
-                    st.write('steps on how to recycle / dispose material')
+                    st.write('Check local guidelines for specific recycling instructions. ')
             
             elif pred_class == "fsc":
                 with st.container(border=True):
@@ -239,9 +239,9 @@ class LogoClassfier:
                         st.write('actual logo of prediction') 
                 with st.container():
                     st.write(pred_class)
-                    st.write('description') 
+                    st.write('This logo certifies that the wood or paper products come from responsibly managed forests. It is recycable ') 
                 with st.container():
-                    st.write('steps on how to recycle / dispose material')
+                    st.write('Place in the paper recycling bin. ')
             
             elif pred_class == "ce_marking":
                 with st.container(border=True):
@@ -252,9 +252,9 @@ class LogoClassfier:
                         st.write('actual logo of prediction') 
                 with st.container():
                     st.write(pred_class)
-                    st.write('description') 
+                    st.write('This logo indicates conformity with health, safety, and environmental protection standards for products sold within the European Economic Area. this is not a recycling logo.') 
                 with st.container():
-                    st.write('steps on how to recycle / dispose material')
+                    st.write('steps on how to recycle / dispose material please follow local disposal guidelines. ')
             
             elif pred_class == "aluminium":
                 with st.container(border=True):
@@ -265,9 +265,9 @@ class LogoClassfier:
                         st.write('actual logo of prediction') 
                 with st.container():
                     st.write(pred_class)
-                    st.write('description') 
+                    st.write('This logo indicates that the item is made from aluminum, a highly recyclable material. due to this it is recycable') 
                 with st.container():
-                    st.write('steps on how to recycle / dispose material')
+                    st.write('steps on how to recycle / dispose material is by rinsing out any food residue and place in the recycling bin. ')
             
             else:
                 st.write('Logo undetected! Please try again.')
