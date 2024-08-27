@@ -76,7 +76,7 @@ menu = option_menu(None, ["Home", "Upload Logo Prediction"],
 
 # Home Page
 if menu == 'Home':
-    tab1, tab2, tab3 = st.tabs(['Description', 'Recycle Logos', 'Contact'])
+    tab1, tab2 = st.tabs(['Description', 'Recycle Logos'])
 
     with tab1: # Description Tab
         st.title("This is the Description tab. \n")
@@ -381,7 +381,7 @@ if menu == 'Upload Logo Prediction':
         if show_img:
             crop_section.empty()
             display_section = st.empty()
-            my_prediction = LogoClassfier('D:\FYP Group 1\my_model.h5')
+            my_prediction = LogoClassfier('D:\Data Related Stuffs\FYP Model\FYP-Group-1\ResNet50.h5')
 
             with display_section.container():
                 for cropped_image in st.session_state.cropped_img_list:
