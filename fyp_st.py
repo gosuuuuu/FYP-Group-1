@@ -388,7 +388,7 @@ if menu == 'Upload Logo Prediction':
                     loaded_img = my_prediction.load_img(cropped_image)
                     
                     with st.container(border=True):
-                        pred_class = my_prediction.model_upload(loaded_img)       
+                        pred_class = my_prediction.model_upload(cropped_image, loaded_img)        
     
     else:
         st.write('Please upload an image.')
