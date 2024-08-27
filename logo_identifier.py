@@ -1,12 +1,9 @@
+# Import Libraries
 import streamlit as st
-import pandas as pd
 import numpy as np
 import tensorflow as tf
-import os
-from PIL import Image
-from streamlit_img_label import st_img_label
-from streamlit_img_label.manage import ImageManager, ImageDirManager
-from streamlit_cropper import st_cropper
+import base64
+import io
 
 
 class LogoClassfier:
@@ -34,18 +31,17 @@ class LogoClassfier:
             prediction = self.model.predict(loaded_img)
             pred_class = self.classes[np.argmax(prediction)]
 
-    
             if pred_class == "tidyman":
                 with st.container(border=True):
                     col_logo = st.columns(2)
                     with col_logo[0]:
-                        st.write('captured image') # To insert captured image
-                        st.image(cropped_image)
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Uploaded Picture</h3>", unsafe_allow_html=True)
+                        st.image(cropped_image, use_column_width=False)
                     with col_logo[1]:   
-                        st.write('actual logo of prediction') # Insert predicted logo
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Predicted Logo</h3>", unsafe_allow_html=True)
                 with st.container():
                     st.write(pred_class)
-                    st.write('A symbol encouraging proper waste disposal. ') # To insert description
+                    st.write('A symbol encouraging proper waste disposal. ')
                 with st.container():
                     st.write('as this symbol is to encourage the buyer , it is not applicable; this is not a recycling logo. therefore dispose of waste responsibly in the appropriate bin.  ') # Insert steps
                     
@@ -53,10 +49,10 @@ class LogoClassfier:
                 with st.container(border=True):
                     col_logo = st.columns(2)
                     with col_logo[0]:
-                        st.write('captured image')
-                        st.image(cropped_image)
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Uploaded Picture</h3>", unsafe_allow_html=True)
+                        st.image(cropped_image, use_column_width=False)
                     with col_logo[1]:   
-                        st.write('actual logo of prediction') 
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Predicted Logo</h3>", unsafe_allow_html=True)
                 with st.container():
                     st.write(pred_class)
                     st.write('Often used for disposable cutlery and foam containers. It is not easily recyclable.') 
@@ -67,10 +63,10 @@ class LogoClassfier:
                 with st.container(border=True):
                     col_logo = st.columns(2)
                     with col_logo[0]:
-                        st.write('captured image')
-                        st.image(cropped_image)
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Uploaded Picture</h3>", unsafe_allow_html=True)
+                        st.image(cropped_image, use_column_width=False)
                     with col_logo[1]:   
-                        st.write('actual logo of prediction') 
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Predicted Logo</h3>", unsafe_allow_html=True)
                 with st.container():
                     st.write(pred_class)
                     st.write('A Recycable plastic used for containers, straws, and some packaging.') 
@@ -81,10 +77,10 @@ class LogoClassfier:
                 with st.container(border=True):
                     col_logo = st.columns(2)
                     with col_logo[0]:
-                        st.write('captured image')
-                        st.image(cropped_image)
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Uploaded Picture</h3>", unsafe_allow_html=True)
+                        st.image(cropped_image, use_column_width=False)
                     with col_logo[1]:   
-                        st.write('actual logo of prediction') 
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Predicted Logo</h3>", unsafe_allow_html=True)
                 with st.container():
                     st.write(pred_class)
                     st.write('A Recycable plastic used for containers, straws, and some packaging.') 
@@ -95,10 +91,10 @@ class LogoClassfier:
                 with st.container(border=True):
                     col_logo = st.columns(2)
                     with col_logo[0]:
-                        st.write('captured image')
-                        st.image(cropped_image)
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Uploaded Picture</h3>", unsafe_allow_html=True)
+                        st.image(cropped_image, use_column_width=False)
                     with col_logo[1]:   
-                        st.write('actual logo of prediction') 
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Predicted Logo</h3>", unsafe_allow_html=True)
                 with st.container():
                     st.write(pred_class)
                     st.write('Depends on local facilities it is recycable , it is used in various applications, including textiles and packaging. ') 
@@ -109,10 +105,10 @@ class LogoClassfier:
                 with st.container(border=True):
                     col_logo = st.columns(2)
                     with col_logo[0]:
-                        st.write('captured image')
-                        st.image(cropped_image)
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Uploaded Picture</h3>", unsafe_allow_html=True)
+                        st.image(cropped_image, use_column_width=False)
                     with col_logo[1]:   
-                        st.write('actual logo of prediction') 
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Predicted Logo</h3>", unsafe_allow_html=True)
                 with st.container():
                     st.write(pred_class)
                     st.write('Depends on the specific type; check local guidelines it is recycable. This logo covers various types of plastic that do not fit into the other categories.  ') 
@@ -123,10 +119,10 @@ class LogoClassfier:
                 with st.container(border=True):
                     col_logo = st.columns(2)
                     with col_logo[0]:
-                        st.write('captured image')
-                        st.image(cropped_image)
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Uploaded Picture</h3>", unsafe_allow_html=True)
+                        st.image(cropped_image, use_column_width=False)
                     with col_logo[1]:   
-                        st.write('actual logo of prediction') 
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Predicted Logo</h3>", unsafe_allow_html=True)
                 with st.container():
                     st.write(pred_class)
                     st.write('Often used for plastic bags and some containers. Yes it is recycable, but only at specific facilities. ') 
@@ -137,10 +133,10 @@ class LogoClassfier:
                 with st.container(border=True):
                     col_logo = st.columns(2)
                     with col_logo[0]:
-                        st.write('captured image')
-                        st.image(cropped_image)
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Uploaded Picture</h3>", unsafe_allow_html=True)
+                        st.image(cropped_image, use_column_width=False)
                     with col_logo[1]:   
-                        st.write('actual logo of prediction') 
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Predicted Logo</h3>", unsafe_allow_html=True)
                 with st.container():
                     st.write(pred_class)
                     st.write('Commonly used for containers like milk jugs and detergent bottles. Yes, it is recycable ') 
@@ -151,10 +147,10 @@ class LogoClassfier:
                 with st.container(border=True):
                     col_logo = st.columns(2)
                     with col_logo[0]:
-                        st.write('captured image')
-                        st.image(cropped_image)
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Uploaded Picture</h3>", unsafe_allow_html=True)
+                        st.image(cropped_image, use_column_width=False)
                     with col_logo[1]:   
-                        st.write('actual logo of prediction') 
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Predicted Logo</h3>", unsafe_allow_html=True)
                 with st.container():
                     st.write(pred_class)
                     st.write('This logo indicates the product should be used within thirty-six months after opening. Depending on the material it is recycable') 
@@ -165,10 +161,10 @@ class LogoClassfier:
                 with st.container(border=True):
                     col_logo = st.columns(2)
                     with col_logo[0]:
-                        st.write('captured image')
-                        st.image(cropped_image)
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Uploaded Picture</h3>", unsafe_allow_html=True)
+                        st.image(cropped_image, use_column_width=False)
                     with col_logo[1]:   
-                        st.write('actual logo of prediction') 
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Predicted Logo</h3>", unsafe_allow_html=True)
                 with st.container():
                     st.write(pred_class)
                     st.write('This logo Indicates the product should be used within twenty-four months after opening. Depending on the material it is recycable') 
@@ -179,10 +175,10 @@ class LogoClassfier:
                 with st.container(border=True):
                     col_logo = st.columns(2)
                     with col_logo[0]:
-                        st.write('captured image')
-                        st.image(cropped_image)
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Uploaded Picture</h3>", unsafe_allow_html=True)
+                        st.image(cropped_image, use_column_width=False)
                     with col_logo[1]:   
-                        st.write('actual logo of prediction') 
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Predicted Logo</h3>", unsafe_allow_html=True)
                 with st.container():
                     st.write(pred_class)
                     st.write('This logo indicates the product should be used within twelve months after opening. Depending on the material it is recycable') 
@@ -193,10 +189,10 @@ class LogoClassfier:
                 with st.container(border=True):
                     col_logo = st.columns(2)
                     with col_logo[0]:
-                        st.write('captured image')
-                        st.image(cropped_image)
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Uploaded Picture</h3>", unsafe_allow_html=True)
+                        st.image(cropped_image, use_column_width=False)
                     with col_logo[1]:   
-                        st.write('actual logo of prediction') 
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Predicted Logo</h3>", unsafe_allow_html=True)
                 with st.container():
                     st.write(pred_class)
                     st.write('This logo indicates the product should be used within nine months after opening. Depending on the material it is recycable') 
@@ -207,10 +203,10 @@ class LogoClassfier:
                 with st.container(border=True):
                     col_logo = st.columns(2)
                     with col_logo[0]:
-                        st.write('captured image')
-                        st.image(cropped_image)
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Uploaded Picture</h3>", unsafe_allow_html=True)
+                        st.image(cropped_image, use_column_width=False)
                     with col_logo[1]:   
-                        st.write('actual logo of prediction') 
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Predicted Logo</h3>", unsafe_allow_html=True)
                 with st.container():
                     st.write(pred_class)
                     st.write('This logo indicates the product should be used within six months after opening. Depending on the material it is recycable') 
@@ -221,10 +217,10 @@ class LogoClassfier:
                 with st.container(border=True):
                     col_logo = st.columns(2)
                     with col_logo[0]:
-                        st.write('captured image')
-                        st.image(cropped_image)
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Uploaded Picture</h3>", unsafe_allow_html=True)
+                        st.image(cropped_image, use_column_width=False)
                     with col_logo[1]:   
-                        st.write('actual logo of prediction') 
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Predicted Logo</h3>", unsafe_allow_html=True)
                 with st.container():
                     st.write(pred_class)
                     st.write('This logo indicates the product should be used within three months after opening. Depending on the material it is recycable') 
@@ -235,10 +231,10 @@ class LogoClassfier:
                 with st.container(border=True):
                     col_logo = st.columns(2)
                     with col_logo[0]:
-                        st.write('captured image')
-                        st.image(cropped_image)
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Uploaded Picture</h3>", unsafe_allow_html=True)
+                        st.image(cropped_image, use_column_width=False)
                     with col_logo[1]:   
-                        st.write('actual logo of prediction') 
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Predicted Logo</h3>", unsafe_allow_html=True)
                 with st.container():
                     st.write(pred_class)
                     st.write('This logo represents that the product is recyclable. ') 
@@ -249,10 +245,10 @@ class LogoClassfier:
                 with st.container(border=True):
                     col_logo = st.columns(2)
                     with col_logo[0]:
-                        st.write('captured image')
-                        st.image(cropped_image)
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Uploaded Picture</h3>", unsafe_allow_html=True)
+                        st.image(cropped_image, use_column_width=False)
                     with col_logo[1]:   
-                        st.write('actual logo of prediction') 
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Predicted Logo</h3>", unsafe_allow_html=True)
                 with st.container():
                     st.write(pred_class)
                     st.write('This logo certifies that the wood or paper products come from responsibly managed forests. It is recycable ') 
@@ -263,13 +259,14 @@ class LogoClassfier:
                 with st.container(border=True):
                     col_logo = st.columns(2)
                     with col_logo[0]:
-                        st.write('captured image')
-                        st.image(cropped_image)
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Uploaded Picture</h3>", unsafe_allow_html=True)
+                        st.image(cropped_image, use_column_width=False)
                     with col_logo[1]:   
-                        st.write('actual logo of prediction') 
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Predicted Logo</h3>", unsafe_allow_html=True)
                 with st.container():
-                    with st.expander('meow'):
-                        st.write(pred_class)
+                    with st.expander('See Explanation'):
+                        st.markdown("<h3 style='text-align: center; color: grey;'>CE Mark</h3>", unsafe_allow_html=True)
+                        st.divider()
                         st.write('This logo indicates conformity with health, safety, and environmental protection standards for products sold within the European Economic Area. this is not a recycling logo.') 
                         st.write('steps on how to recycle / dispose material please follow local disposal guidelines. ')
                 
@@ -277,10 +274,10 @@ class LogoClassfier:
                 with st.container(border=True):
                     col_logo = st.columns(2)
                     with col_logo[0]:
-                        st.write('captured image')
-                        st.image(cropped_image)
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Uploaded Picture</h3>", unsafe_allow_html=True)
+                        st.image(cropped_image, use_column_width=False)
                     with col_logo[1]:   
-                        st.write('actual logo of prediction') 
+                        st.markdown("<h3 style='text-align: center; color: grey;'>Predicted Logo</h3>", unsafe_allow_html=True)
                 with st.container():
                     st.write(pred_class)
                     st.write('This logo indicates that the item is made from aluminum, a highly recyclable material. due to this it is recycable') 
