@@ -1,45 +1,31 @@
+# Import Libraries
 import streamlit as st
-import pandas as pd
-import tensorflow as tf
-import numpy as np
-from PIL import Image
+from PIL import Image, ImageChops
 from streamlit_option_menu import option_menu
-import base64
 from logo_identifier import LogoClassfier
-from streamlit_img_label import st_img_label
 from streamlit_cropper import st_cropper
-import os
 from streamlit_modal import Modal
-import streamlit.components.v1 as components
 
+# Configuring the page layout
 st.set_page_config(layout="wide",
                    initial_sidebar_state="collapsed",
                    page_title='IdentiLog'
                    )
 
-
+# Setting the size and font of text
 def black_font():
     st.markdown(
         """ <style>
         * {color: black !important;
-            font-size: 23px !important;
+            font-size: 18px !important;
         }
         </style>
         """,
         unsafe_allow_html=True
     )
-
 black_font()
 
-# To be changed
-#st.markdown("<h1 style='text-align: center; color: black; background-color: #b8ffbc'>I D E N T I L O G</h1>", 
-            #unsafe_allow_html=True)
-
-#################### LOGO ####################
-
-# Using URL #
-import streamlit as st
-
+# Set Logo using URL
 def set_logo(logo_url):
     st.markdown(
         f"""
@@ -49,33 +35,10 @@ def set_logo(logo_url):
         """,
         unsafe_allow_html=True
     )
-
 logo_url = "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Logo%20and%20Background/BlackFontBG.png"
 set_logo(logo_url)
 
-# Using Local #
-
-# def set_logo(logo_path):
-    
-#     with open(logo_path, "rb") as image_file:
-#         encoded_string = base64.b64encode(image_file.read()).decode()
-    
-#     st.markdown(
-#         f"""
-#         <div style="text-align:center;">
-#              <img src="data:image/png;base64,{encoded_string}" alt="Logo" style="width:300px;">
-#         </div>
-#         """,
-#         unsafe_allow_html=True
-#     )
-
-# logo_path = r"C:\Users\insya\Desktop\Black_BG.png"
-# set_logo(logo_path)
-
-#################### BACKGROUND IMAGE ####################
-
-# Using URL #
-
+# Set BG using URL 
 def set_bg(img_url):
     st.markdown(
         f"""
@@ -90,39 +53,11 @@ def set_bg(img_url):
         """,
         unsafe_allow_html=True
     )
-
 img_url = "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Logo%20and%20Background/Background%20.png"
 set_bg(img_url)
 
-
-# Using Lokal #
-
-# def set_bg(img_path):
-#     bg_ext = 'png'
-    
-#     with open(img_path, "rb") as image_file:
-#         encoded_string = base64.b64encode(image_file.read()).decode()
-    
-#     st.markdown(
-#         f"""
-#         <style>
-#         .stApp {{
-#             background: url(data:image/{bg_ext};base64,{encoded_string})
-#         }}
-#         </style>
-#         """,
-#         unsafe_allow_html=True
-#     )
-
-# img_bg = r"C:\Users\insya\Pictures\Wallpaper\Lock Screen.jpg"
-# set_bg(img_bg)
-
-#img_bg_ena = r"C:\Users\User\OneDrive\Desktop\identilog_bg.jpg"
-#set_bg(img_bg_ena)
-
-
-#################### OPTION MENU ####################
-menu = option_menu(None, ["home", "upload"], 
+#################### OPTION MENU #################### to be changed?
+menu = option_menu(None, ["Home", "Upload Logo Prediction"], 
     icons=['house', 'cloud-upload'],
     menu_icon="cast", default_index=0, orientation="horizontal",
     styles={
@@ -143,16 +78,17 @@ menu = option_menu(None, ["home", "upload"],
 if menu == 'home':
     tab1, tab2, tab3 = st.tabs(['Description', 'Recycle Logos', 'Contact'])
 
-    with tab1:
+    with tab1: # Description Tab
         st.title("This is the Description tab. \n")
         st.write("Recycling symbols are used to help us identify different types of packaging and if they are capable of being recycled.  \n"
          "They can be confusing, so we are here to help you make sense of them and hopefully increase what you recycle in and out of the home.")
         
 
-    with tab2:
+    with tab2: # Recycle Logos Tab
         st.title("This is the Recycle Logos tab \n")
         st.write("Few logos that included in the project")
 
+        # Set Container Configuration
         st.markdown(
             """
             <style>
@@ -174,7 +110,7 @@ if menu == 'home':
         with st.container():
             st.markdown('<div class="col-container">', unsafe_allow_html=True)
 
-            col1, col2, col3, col4 = st.columns([1,2,3,4])
+            col1, col2, col3, col4 = st.columns([3,4,3,4])
 
             with col1:
                 st.image(
@@ -312,11 +248,9 @@ if menu == 'home':
                     """
                 )
 
-    with tab3:
+    with tab3: # Contact tab
 
         st.title(":envelope: Get In Touch With Us!")
-
-        import streamlit as st
 
         contact_form = """
             <style>
@@ -362,7 +296,6 @@ if menu == 'home':
 # how to use upload function steps
 # table of contents with links
 
-
 # Upload Page
 if menu == 'upload':
     # 18 classes of logo
@@ -375,13 +308,10 @@ if menu == 'upload':
 
     st.write('Insert description or text here') # To insert description
     
-    
-    
-# Main Function with Modal
-
-    # Creating modals
+# Modal
+    # Creating Modal
     modal_number_logos = Modal("Number Of Logos And File",
-                               key = 'modal 1',
+                               key='modal 1',
                                max_width=800
     )
 
@@ -395,22 +325,22 @@ if menu == 'upload':
 
     # Button
     with st.container():
-        open_modal = st.button("Open",
+        open_modal = st.button("Ready to upload!",
                                use_container_width=True,
                                help='To upload image')
-        if open_modal:
+        if open_modal: # If button is clicked
             modal_number_logos.open()
 
-    if modal_number_logos.is_open():
+    if modal_number_logos.is_open(): # When the variable is opened
         with modal_number_logos.container():
             st.session_state.number_logos = st.number_input('Insert',
                                            min_value=1,
                                            step=1)
             st.session_state.uploaded_img = st.file_uploader('Insert File here')
-            done = st.button('done',
+            done_button = st.button('Done!',
                                use_container_width=True)
-        if done:
-            modal_number_logos.close()    
+        if done_button:
+            modal_number_logos.close() # Modal page is closed    
         
     if st.session_state.uploaded_img is not None:
         img = Image.open(st.session_state.uploaded_img)
@@ -441,43 +371,3 @@ if menu == 'upload':
     
     else:
         st.write('Please upload an image.')
-
-    #         html_string = '''
-    #         <h1>HTML string in RED</h1>
-
-    #         <script language="javascript">
-    #         document.querySelector("h1").style.color = "red";
-    #         </script>
-    #         '''
-    #         components.html(html_string)
-
-    #         st.write("Some fancy text")
-    #         value = st.checkbox("Check me")
-    #         st.write(f"Checkbox checked: {value}")
-    
-    
-    # To uncomment once crop is done
-#     menu_2 = option_menu(None, ["one", "multiple"], 
-#     icons=['house', 'cloud-upload'],
-#     menu_icon="cast", default_index=0, orientation="horizontal",
-#     styles={
-#         "container": {"padding": "0!important", 
-#                         "background-color": "#cfffdd"},
-#         "icon": {"color": "green", 
-#                     "font-size": "20px"}, 
-#         "nav-link": {"font-size": "14px",
-#                         "font-family": "arial" , # to be changed
-#                         "text-align": "center", 
-#                         "margin":"0px", 
-#                         "--hover-color": "#eee"},
-#         "nav-link-selected": {"background-color": "#19c24a"}
-#     }
-# )
-#     if menu_2 == "one":
-#         upload_one = st.file_uploader('Upload Image For Logo Detection', type='jpg')
-#     elif menu_2 == "multiple":
-#         upload_multiple = st.file_uploader('Upload Image For Logos Detection', type='jpg')
-    
-    
-    # Using Class LogoClassfier from created file
-    # my_prediction = LogoClassfier('D:\Data Related Stuffs\FYP Model\FYP-Group-1\ResNet50.h5')
