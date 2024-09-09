@@ -1,6 +1,6 @@
 # Import Libraries
 import streamlit as st
-from PIL import Image, ImageChops
+from PIL import Image
 from streamlit_option_menu import option_menu
 from logo_identifier import LogoClassfier
 from streamlit_cropper import st_cropper
