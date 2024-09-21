@@ -342,7 +342,63 @@ if menu == 'Upload Logo Prediction':
                     loaded_img = my_prediction.load_img(cropped_image)
                     
                     with st.container(border=True):
-                        pred_class = my_prediction.model_upload(cropped_image, loaded_img)        
-    
+                        pred_class = my_prediction.model_upload(cropped_image, loaded_img)
+            
+            st.divider()
+            
+            # Green Button
+            st.markdown(
+                    """
+                    <style>
+                    .green-button {
+                        background-color: #00ab41;
+                        color: white;
+                        border: none;
+                        padding: 10px 20px;
+                        text-align: center;
+                        text-decoration: none;
+                        display: inline-block;
+                        font-size: 14px;
+                        margin: 4px 2px;
+                        cursor: pointer;
+                        border-radius: 8px;
+                        width: 100%;
+                    }
+                    </style>
+                    """,
+                unsafe_allow_html=True)
+            
+            # Red Button
+            st.markdown(
+                    """
+                    <style>
+                    .red-button {
+                        background-color: #df2c14;
+                        color: white;
+                        border: none;
+                        padding: 10px 20px;
+                        text-align: center;
+                        text-decoration: none;
+                        display: inline-block;
+                        font-size: 14px;
+                        margin: 4px 2px;
+                        cursor: pointer;
+                        border-radius: 8px;
+                        width: 100%;
+                    }
+                    </style>
+                    """,
+                unsafe_allow_html=True)
+            
+            st.markdown("<h2 style='text-align: center; color: grey;'>Is The Predicted Logo Correct?</h2>", unsafe_allow_html=True)
+            columns = st.columns(2)
+            with columns[0]:
+                correct = st.markdown('<button class="green-button">Correct!</button>', unsafe_allow_html=True)
+            with columns[1]:
+                wrong = st.markdown('<button class="red-button">Wrong!</button>', unsafe_allow_html=True)
+
+            
+            # Insert pictures for wrong
+            # Insert something to add the pics to folder
     else:
         st.write('Please upload an image.')
