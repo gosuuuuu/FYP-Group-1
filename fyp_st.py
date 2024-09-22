@@ -296,6 +296,10 @@ if menu == 'Upload Logo Prediction':
         st.session_state.number_logos = 2
     if 'cropped_img_list' not in st.session_state:
         st.session_state.cropped_img_list = []
+    if 'correct_button' not in st.session_state:
+        st.session_state.correct_button = False
+    if 'wrong_button' not in st.session_state:
+        st.session_state.wrong_button = False
 
     # Button
     with st.container():
@@ -335,8 +339,8 @@ if menu == 'Upload Logo Prediction':
         if show_img:
             crop_section.empty()
             display_section = st.empty()
+        
             my_prediction = LogoClassfier('D:\Data Related Stuffs\FYP Model\FYP-Group-1\ResNet50.h5')
-
             with display_section.container():
                 for cropped_image in st.session_state.cropped_img_list:
                     loaded_img = my_prediction.load_img(cropped_image)
@@ -346,58 +350,55 @@ if menu == 'Upload Logo Prediction':
             
             st.divider()
             
-            # Green Button
-            st.markdown(
-                    """
-                    <style>
-                    .green-button {
-                        background-color: #00ab41;
-                        color: white;
-                        border: none;
-                        padding: 10px 20px;
-                        text-align: center;
-                        text-decoration: none;
-                        display: inline-block;
-                        font-size: 14px;
-                        margin: 4px 2px;
-                        cursor: pointer;
-                        border-radius: 8px;
-                        width: 100%;
-                    }
-                    </style>
-                    """,
-                unsafe_allow_html=True)
+            # st.markdown(
+            #         """
+            #         <style>
+            #         .green-button {
+            #             background-color: #00ab41;
+            #             color: white;
+            #             border: none;
+            #             padding: 10px 20px;
+            #             text-align: center;
+            #             text-decoration: none;
+            #             display: inline-block;
+            #             font-size: 14px;
+            #             margin: 4px 2px;
+            #             cursor: pointer;
+            #             border-radius: 8px;
+            #             width: 100%;
+            #         }
+            #         .red-button {
+            #             background-color: #df2c14;
+            #             color: white;
+            #             border: none;
+            #             padding: 10px 20px;
+            #             text-align: center;
+            #             text-decoration: none;
+            #             display: inline-block;
+            #             font-size: 14px;
+            #             margin: 4px 2px;
+            #             cursor: pointer;
+            #             border-radius: 8px;
+            #             width: 100%;
+            #         </style>
+            #         """,
+            #     unsafe_allow_html=True)
             
-            # Red Button
-            st.markdown(
-                    """
-                    <style>
-                    .red-button {
-                        background-color: #df2c14;
-                        color: white;
-                        border: none;
-                        padding: 10px 20px;
-                        text-align: center;
-                        text-decoration: none;
-                        display: inline-block;
-                        font-size: 14px;
-                        margin: 4px 2px;
-                        cursor: pointer;
-                        border-radius: 8px;
-                        width: 100%;
-                    }
-                    </style>
-                    """,
-                unsafe_allow_html=True)
-            
-            st.markdown("<h2 style='text-align: center; color: grey;'>Is The Predicted Logo Correct?</h2>", unsafe_allow_html=True)
+            st.markdown("<h2 style='text-align: center; color: grey;'>Is the predicted logo correct?</h2>", unsafe_allow_html=True)
             columns = st.columns(2)
             with columns[0]:
-                correct = st.markdown('<button class="green-button">Correct!</button>', unsafe_allow_html=True)
+                if st.button('Correct', use_container_width=True):
+                    st.session_state.correct_button = True
+                    st.session_state.wrong_button = False
             with columns[1]:
-                wrong = st.markdown('<button class="red-button">Wrong!</button>', unsafe_allow_html=True)
-
+                if st.button('Wrong!', use_container_width=True):
+                    st.session_state.correct_button = False
+                    st.session_state.wrong_button = True
             
+            if st.session_state.correct_button:
+                st.write('Nice.')
+            elif st.session_state.wrong_button:
+                st.write('Sad.')
             # Insert pictures for wrong
             # Insert something to add the pics to folder
     else:
