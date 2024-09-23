@@ -52,10 +52,9 @@ st.markdown("""
 st.markdown("""
     <div class="top-bar">
         <a href="?page=home">Home</a>
-        <a href="?page=upload">Upload</a>
+        <a href="?page=upload-prediction">Upload logo prediction</a>
         <a href="?page=description">Description</a>
         <a href="?page=recycle-logos">Recycle Logos</a>
-        <a href="?page=contact">Contact</a>
     </div>
 """, unsafe_allow_html=True)
 
@@ -101,9 +100,9 @@ if page == "home":
     st.title("Home")
     st.write("Welcome to the Home page!")
 
-elif page == "upload":
-    st.title("Upload")
-    st.write("Upload your files here.")
+elif page == "upload-prediction":
+    st.title("Upload Logo Prediction")
+    st.write("Upload your logo for prediction.")
 
 elif page == "description":
     st.title("Description")
@@ -112,10 +111,6 @@ elif page == "description":
 elif page == "recycle-logos":
     st.title("Recycle Logos")
     st.write("Information about recycling logos.")
-
-elif page == "contact":
-    st.title("Contact")
-    st.write("You can reach us at contact@example.com")
 
 # Additional container styling
 st.markdown('<div class="container">', unsafe_allow_html=True)
