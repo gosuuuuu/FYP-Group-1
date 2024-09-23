@@ -1,6 +1,6 @@
 # Import Libraries
 import streamlit as st
-from PIL import Image, ImageChops
+from PIL import Image
 from streamlit_option_menu import option_menu
 from logo_identifier import LogoClassfier
 from streamlit_cropper import st_cropper
@@ -56,7 +56,8 @@ def set_bg(img_url):
 img_url = "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Logo%20and%20Background/Background%20.png"
 set_bg(img_url)
 
-#################### OPTION MENU #################### to be changed?
+
+#################### OPTION MENU ####################
 menu = option_menu(None, ["Home", "Upload Logo Prediction"], 
     icons=['house', 'cloud-upload'],
     menu_icon="cast", default_index=0, orientation="horizontal",
@@ -267,53 +268,6 @@ if menu == 'Home':
                 """
             )
 
-    # with tab3: # Contact tab
-
-    #     st.title(":envelope: Get In Touch With Us!")
-
-    #     contact_form = """
-    #         <style>
-    #         form {
-    #             width: 100%;
-    #         }
-    #         input[type=text], input[type=email], textarea {
-    #             width: 100%;
-    #             padding: 12px;
-    #             border: 1px solid #ccc;
-    #             border-radius: 4px;
-    #             box-sizing: border-box;
-    #             margin-top: 6px;
-    #             margin-bottom: 16px;
-    #             background-color: #FFFFFF;
-    #         }
-    #         textarea {
-    #             resize: vertical;
-    #         }
-    #         button[type=submit] {
-    #             background-color: #04AA6D;
-    #             color: white;
-    #             padding: 12px 20px;
-    #             border: none;
-    #             border-radius: 4px;
-    #             cursor: pointer;
-    #         }
-    #         button[type=submit]:hover {
-    #             background-color: #45a049;
-    #         }
-    #         </style>
-    #         <form action="https://formsubmit.co/YOUREMAIL@EMAIL.COM" method="POST">
-    #             <input type="hidden" name="_captcha" value="false">
-    #             <input type="text" name="name" placeholder="Your name" required>
-    #             <input type="email" name="email" placeholder="Your email" required>
-    #             <textarea name="message" placeholder="Your message here"></textarea>
-    #             <button type="submit">Send</button>
-    #         </form>
-    #     """
-    #     st.markdown(contact_form, unsafe_allow_html=True)
-
-# insert description of website
-# how to use upload function steps
-# table of contents with links
 
 # Upload Page
 if menu == 'Upload Logo Prediction':
@@ -342,6 +296,10 @@ if menu == 'Upload Logo Prediction':
         st.session_state.number_logos = 2
     if 'cropped_img_list' not in st.session_state:
         st.session_state.cropped_img_list = []
+    if 'correct_button' not in st.session_state:
+        st.session_state.correct_button = False
+    if 'wrong_button' not in st.session_state:
+        st.session_state.wrong_button = False
 
     # Button
     with st.container():
@@ -381,14 +339,67 @@ if menu == 'Upload Logo Prediction':
         if show_img:
             crop_section.empty()
             display_section = st.empty()
+        
             my_prediction = LogoClassfier('D:\Data Related Stuffs\FYP Model\FYP-Group-1\ResNet50.h5')
-
             with display_section.container():
                 for cropped_image in st.session_state.cropped_img_list:
                     loaded_img = my_prediction.load_img(cropped_image)
                     
                     with st.container(border=True):
-                        pred_class = my_prediction.model_upload(cropped_image, loaded_img)        
-    
+                        pred_class = my_prediction.model_upload(cropped_image, loaded_img)
+            
+            st.divider()
+            
+            # st.markdown(
+            #         """
+            #         <style>
+            #         .green-button {
+            #             background-color: #00ab41;
+            #             color: white;
+            #             border: none;
+            #             padding: 10px 20px;
+            #             text-align: center;
+            #             text-decoration: none;
+            #             display: inline-block;
+            #             font-size: 14px;
+            #             margin: 4px 2px;
+            #             cursor: pointer;
+            #             border-radius: 8px;
+            #             width: 100%;
+            #         }
+            #         .red-button {
+            #             background-color: #df2c14;
+            #             color: white;
+            #             border: none;
+            #             padding: 10px 20px;
+            #             text-align: center;
+            #             text-decoration: none;
+            #             display: inline-block;
+            #             font-size: 14px;
+            #             margin: 4px 2px;
+            #             cursor: pointer;
+            #             border-radius: 8px;
+            #             width: 100%;
+            #         </style>
+            #         """,
+            #     unsafe_allow_html=True)
+            
+            st.markdown("<h2 style='text-align: center; color: grey;'>Is the predicted logo correct?</h2>", unsafe_allow_html=True)
+            columns = st.columns(2)
+            with columns[0]:
+                if st.button('Correct', use_container_width=True):
+                    st.session_state.correct_button = True
+                    st.session_state.wrong_button = False
+            with columns[1]:
+                if st.button('Wrong!', use_container_width=True):
+                    st.session_state.correct_button = False
+                    st.session_state.wrong_button = True
+            
+            if st.session_state.correct_button:
+                st.write('Nice.')
+            elif st.session_state.wrong_button:
+                st.write('Sad.')
+            # Insert pictures for wrong
+            # Insert something to add the pics to folder
     else:
         st.write('Please upload an image.')
