@@ -29,8 +29,8 @@ black_font()
 def set_logo(logo_url):
     st.markdown(
         f"""
-        <div style="text-align:center;">
-             <img src="{logo_url}" alt="Logo" style="width:300px;">
+        <div style="text-align:center; margin-top: -60px;">
+             <img src="{logo_url}" alt="Logo" style="width:250px;">
         </div>
         """,
         unsafe_allow_html=True
@@ -76,6 +76,17 @@ menu = option_menu(None, ["Home", "Upload Logo Prediction"],
 )
 
 # Home Page
+
+st.markdown(
+                """
+                <div style='text-align: center;'>
+                    <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Logo%20and%20Background/classic-removebg-preview.png" 
+                        width="1430">
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
 if menu == 'Home':
     tab1, tab2 = st.tabs(['Description', 'Recycle Logos'])
 
@@ -94,11 +105,10 @@ if menu == 'Home':
         with col1:
             st.markdown(
                 """
-                <div style='text-align: center;'>
+                <div style='text-align: center; margin: 0px 100px 50px 0px;'>
                     <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/aluminium.png" 
                         alt="Aluminium Logo" 
-                        width="200">
-                    <p>Aluminium Logo</p>
+                        width="180">
                 </div>
                 """,
                 unsafe_allow_html=True,
@@ -118,11 +128,9 @@ if menu == 'Home':
         with col3:
             st.markdown(
                 """
-                <div style='text-align: center;'>
-                    <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/ce.png" 
-                        alt="Aluminium Logo" 
-                        width="250">
-                    <p>Aluminium Logo</p>
+                <div style='text-align: center; margin: 0px 100px 50px 0px;'>
+                    <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/ce.png"  
+                        width="230">
                 </div>
                 """,
                 unsafe_allow_html=True,
@@ -141,11 +149,9 @@ if menu == 'Home':
         with col5:
             st.markdown(
                 """
-                <div style='text-align: center;'>
+                <div style='text-align: center; margin: 0px 100px 50px 0px;'>
                     <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/fsc.png" 
-                        alt="Aluminium Logo" 
-                        width="200">
-                    <p>Aluminium Logo</p>
+                        width="170">
                 </div>
                 """,
                 unsafe_allow_html=True,
@@ -162,11 +168,9 @@ if menu == 'Home':
         with col7:
             st.markdown(
                 """
-                <div style='text-align: center;'>
+                <div style='text-align: center; margin: 0px 100px 50px 0px;'>
                     <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/mobiusloop.png" 
-                        alt="Aluminium Logo" 
-                        width="200">
-                    <p>Aluminium Logo</p>
+                        width="180">
                 </div>
                 """,
                 unsafe_allow_html=True,
@@ -185,11 +189,9 @@ if menu == 'Home':
         with col9:
             st.markdown(
                 """
-                <div style='text-align: center;'>
-                    <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/pao.png" 
-                        alt="Aluminium Logo" 
+                <div style='text-align: center; margin: 0px 100px 50px 0px;'>
+                    <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/pao.png"  
                         width="200">
-                    <p>Aluminium Logo</p>
                 </div>
                 """,
                 unsafe_allow_html=True,
@@ -206,11 +208,9 @@ if menu == 'Home':
         with col11:
             st.markdown(
                 """
-                <div style='text-align: center;'>
-                    <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/plastic.png" 
-                        alt="Aluminium Logo" 
+                <div style='text-align: center; margin: 0px 100px 50px 0px;'>
+                    <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/plastic.png"  
                         width="200">
-                    <p>Aluminium Logo</p>
                 </div>
                 """,
                 unsafe_allow_html=True,
@@ -229,11 +229,9 @@ if menu == 'Home':
         with col13:
             st.markdown(
                 """
-                <div style='text-align: center;'>
+                <div style='text-align: center; margin: 0px 100px 50px 0px;'>
                     <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/tidyman.png" 
-                        alt="Aluminium Logo" 
-                        width="200">
-                    <p>Aluminium Logo</p>
+                        width="180">
                 </div>
                 """,
                 unsafe_allow_html=True,
@@ -250,11 +248,9 @@ if menu == 'Home':
         with col15:
             st.markdown(
                 """
-                <div style='text-align: center;'>
+                <div style='text-align: center; margin: 0px 100px 50px 0px;'>
                     <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/waste.png" 
-                        alt="Aluminium Logo" 
                         width="200">
-                    <p>Aluminium Logo</p>
                 </div>
                 """,
                 unsafe_allow_html=True,
