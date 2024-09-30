@@ -292,6 +292,8 @@ if menu == 'Upload Logo Prediction':
         st.session_state.number_logos = 2
     if 'cropped_img_list' not in st.session_state:
         st.session_state.cropped_img_list = []
+    if 'form_submitted' not in st.session_state:
+        st.session_state.form_submitted = False 
     
 
     # Button
@@ -343,16 +345,7 @@ if menu == 'Upload Logo Prediction':
                     
                     with st.container(border=True):
                         pred_class = my_prediction.model_upload(cropped_image, loaded_img)
-                        if st.button('Done!'):
-                            display_section.empty()
-        
-                        # To be continued here
-                            st.write('Is the predicted logo correct?')
-                            
-                            if st.button('Yes!', use_container_width=True):
-                                st.write('Nice!')
-                            if st.button('No!', use_container_width=True):
-                                st.write('Sad :(')
+            
         
 else:
     st.write('Please upload an image.')
