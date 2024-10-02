@@ -77,9 +77,11 @@ menu = option_menu(None, ["Home", "Upload Logo Prediction"],
     }
 )
 
-# Home Page
 
-st.markdown(
+
+# Home Page
+if menu == 'Home':
+    st.markdown(
                 """
                 <div style='text-align: center;'>
                     <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Logo%20and%20Background/classic-removebg-preview.png" 
@@ -89,7 +91,6 @@ st.markdown(
                 unsafe_allow_html=True,
             )
 
-if menu == 'Home':
     tab1, tab2 = st.tabs(['Description', 'Recycle Logos'])
 
     with tab1: # Description Tab
@@ -364,3 +365,9 @@ if menu == 'Upload Logo Prediction':
         
 else:
     st.write('Please upload an image.')
+
+menu2 = option_menu(None, ["Recycle", "Upload Logo Prediction"],)
+if menu2 == 'Recycle':
+    st.markdown(
+        st.title("Recyle"))
+                
