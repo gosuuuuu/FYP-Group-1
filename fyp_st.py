@@ -1,10 +1,12 @@
 # Import Libraries
 import streamlit as st
+import os
 from PIL import Image
 from streamlit_option_menu import option_menu
 from logo_identifier import LogoClassfier
 from streamlit_cropper import st_cropper
 from streamlit_modal import Modal
+from datetime import datetime as dt
 
 # Configuring the page layout
 st.set_page_config(layout="wide",
@@ -267,6 +269,8 @@ if menu == 'Home':
 
 # Upload Page
 if menu == 'Upload Logo Prediction':
+    my_prediction = LogoClassfier("G:\My Drive\Poli\SEM 5\ResNet50.h5") # Change to google drive
+    
     # 18 classes of logo
     classes=["tidyman", "plastic_PS", "plastic_PP",
             "plastic_PET", "plastic_PAP", "plastic_other",
@@ -329,8 +333,20 @@ if menu == 'Upload Logo Prediction':
                                         realtime_update = False,
                                         aspect_ratio = None,
                                         key = index)
-                st.session_state.cropped_img_list.append(cropped_image)    
+                st.session_state.cropped_img_list.append(cropped_image)
+            
+            
+            def save_image(images, path, filename=None):
+                if not os.path.exists(path):
+                    os.makedirs(path)
+                
+                for index, image in enumerate(images):
+                    filename = f"image_{dt.now().strftime('%d%m%Y_%H%M')}_{index}.png"
+                    image.save(os.path.join(path, filename))
+                
             show_img = st.button('Done Cropping !')
+            save_path = "G:\My Drive\FYP Photos"
+            save_image(st.session_state.cropped_img_list, save_path)
         
         # Display section
         if show_img:
@@ -338,7 +354,6 @@ if menu == 'Upload Logo Prediction':
             crop_section.empty()
             display_section = st.empty()
         
-            my_prediction = LogoClassfier('D:\Data Related Stuffs\FYP Model\FYP-Group-1\ResNet50.h5')
             with display_section.container():
                 for cropped_image in st.session_state.cropped_img_list:
                     loaded_img = my_prediction.load_img(cropped_image)
