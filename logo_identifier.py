@@ -2,8 +2,8 @@
 import streamlit as st
 import numpy as np
 import tensorflow as tf
-import base64
-import io
+import os
+from datetime import datetime as dt
 
 
 class LogoClassfier:
@@ -30,6 +30,8 @@ class LogoClassfier:
     def model_upload(self, cropped_image, loaded_img):
             prediction = self.model.predict(loaded_img)
             pred_class = self.classes[np.argmax(prediction)]
+            cropped_image = cropped_image.resize(224,224)
+            loaded_image = loaded_image.resize(224,224)
 
             if pred_class == "tidyman":
                 with st.container(border=True):
