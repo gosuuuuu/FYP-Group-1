@@ -284,7 +284,7 @@ class LogoClassfier:
                     st.write(pred_class)
                     st.write('This logo indicates that the item is made from aluminum, a highly recyclable material. due to this it is recycable') 
                 with st.container():
-                    st.write('ALU: Represents aluminum, which can be recycled at The Green Depot in Kuala Belait but typically requires specialized processing. Recycling aluminum helps reduce energy consumption and environmental impact. For more information, visit The Green Depot.')
+                    st.write('this logo represents aluminum, which can be recycled at The Green Depot in Kuala Belait but typically requires specialized processing. Recycling aluminum helps reduce energy consumption and environmental impact. For more information, visit The Green Depot.')
             
             else:
                 st.write('Logo undetected! Please try again.')
