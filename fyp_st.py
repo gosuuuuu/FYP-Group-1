@@ -122,7 +122,7 @@ if menu == 'Home':
             st.markdown(
             """
             <p style='font-size:100px;'>
-            The Recyclable Aluminium Recyclable Aluminium Indicates that the item is made from aluminum, a highly recyclable material.
+            ALU: Represents aluminum, which can be recycled at The Green Depot in Kuala Belait but typically requires specialized processing. Recycling aluminum helps reduce energy consumption and environmental impact. For more information, visit The Green Depot.
             </p>
             """,
             unsafe_allow_html=True,
@@ -183,7 +183,7 @@ if menu == 'Home':
             st.subheader("Mobius Loop")
             st.write(
                 """
-                This represents that the product is recyclable.  
+                This symbol indicates recyclability, though whether a product can be recycled easily depends on local facilities. In Brunei, it may require specialized facilities like The Green Depot.   
                 """
             )
 
@@ -244,7 +244,7 @@ if menu == 'Home':
             st.subheader("Tidyman")
             st.write(
                 """
-                A symbol encouraging proper waste disposal.  
+                 This symbol is a reminder to dispose of waste responsibly. It encourages consumers to throw their trash into appropriate trash cans, helping to keep the environment clean. While not a recycling logo, it promotes good waste management practices.  
                 """
             )
 
