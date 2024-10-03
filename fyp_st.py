@@ -27,9 +27,6 @@ def black_font():
     )
 black_font()
 
-st.markdown('<div class="container">', unsafe_allow_html=True)
-
-
 # Set Logo using URL
 def set_logo(logo_url):
     st.markdown(
@@ -60,6 +57,25 @@ def set_bg(img_url):
     )
 img_url = "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Logo%20and%20Background/Background%20.png"
 set_bg(img_url)
+
+
+#################### OPTION MENU ####################
+menu = option_menu(None, ["Home", "Upload Logo Prediction"], 
+    icons=['house', 'cloud-upload'],
+    menu_icon="cast", default_index=0, orientation="horizontal",
+    styles={
+        "container": {"padding": "0!important", 
+                        "background-color": "#cfffdd"},
+        "icon": {"color": "green", 
+                    "font-size": "20px"}, 
+        "nav-link": {"font-size": "20px",
+                        "font-family": "arial" , # to be changed
+                        "text-align": "center", 
+                        "margin":"0px", 
+                        "--hover-color": "#eee"},
+        "nav-link-selected": {"background-color": "#19c24a"}
+    }
+)
 
 st.markdown("""<style>
     body {
@@ -134,7 +150,7 @@ elif page == "description":
     st.write("Recycling symbols are used to help us identify different types of packaging and if they are capable of being recycled.  \n"
         "They can be confusing, so we are here to help you make sense of them and hopefully increase what you recycle in and out of the home.")
     
-elif page == "recycle-logos":
+elifyy
     st.title("This is the Recycle Logos tab \n")
     st.write("Few logos that included in the project")
 
@@ -288,7 +304,7 @@ elif page == "recycle-logos":
 
 
 # Upload Page
-elif page == "upload-prediction":
+if menu == 'Upload Logo Prediction':
     my_prediction = LogoClassfier("G:\My Drive\Poli\SEM 5\ResNet50.h5") # Change to google drive
     
     # 18 classes of logo
@@ -384,4 +400,9 @@ elif page == "upload-prediction":
         
 else:
     st.write('Please upload an image.')
-   
+
+menu2 = option_menu(None, ["Recycle", "Upload Logo Prediction"],)
+if menu2 == 'Recycle':
+    st.markdown(
+        st.title("Recyle"))
+                
