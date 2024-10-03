@@ -127,6 +127,7 @@ if menu == 'Home':
             """,
             unsafe_allow_html=True,
             )
+            st.link_button("Visit The Green Depot", "https://www.instagram.com/greendepotbn")
 
         with col3:
             st.markdown(
@@ -164,9 +165,10 @@ if menu == 'Home':
             st.subheader("FSC")
             st.write(
                 """
-                This certifies that the wood or paper products come from responsibly managed forests.  
+                This certifies that the wood or paper products come from responsibly managed forests. it can be recycled at The Green Depot.   
                 """
             )
+            st.link_button("Visit The Green Depot", "https://www.instagram.com/greendepotbn")
             
         with col7:
             st.markdown(
@@ -186,6 +188,7 @@ if menu == 'Home':
                 This symbol indicates recyclability, though whether a product can be recycled easily depends on local facilities. In Brunei, it may require specialized facilities like The Green Depot.   
                 """
             )
+            st.link_button("Visit The Green Depot", "https://www.instagram.com/greendepotbn")
 
         col9, col10, col11, col12 = st.columns([3,6,3,6])
 
@@ -245,25 +248,6 @@ if menu == 'Home':
             st.write(
                 """
                  This symbol is a reminder to dispose of waste responsibly. It encourages consumers to throw their trash into appropriate trash cans, helping to keep the environment clean. While not a recycling logo, it promotes good waste management practices.  
-                """
-            )
-
-        with col15:
-            st.markdown(
-                """
-                <div style='text-align: center; margin: 0px 100px 50px 0px;'>
-                    <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/waste.png" 
-                        width="200">
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
-
-        with col16:
-            st.subheader("Electric Waste and Battery")
-            st.write(
-                """
-                he crossed-out wheelie bin symbol on your electrical product, batteries, or their packaging, reminds you that all electrical and electronic products and batteries must be recycled through either a recycling centre or with retailers. 
                 """
             )
 
