@@ -29,8 +29,8 @@ class LogoClassfier:
     def model_upload(self, cropped_image, loaded_img):
         prediction = self.model.predict(loaded_img)
         pred_class = self.classes[np.argmax(prediction)]
-        cropped_image = cropped_image.resize((224,224), Image.Resampling.LANCZOS)
-        loaded_image = loaded_image.resize((224,224), Image.Resampling.LANCZOS)
+        cropped_image = cropped_image.resize((224,224), Image.LANCZOS)
+        loaded_image = loaded_image.resize((224,224), Image.LANCZOS)
 
         if pred_class == "tidyman":
             with st.container(border=True):

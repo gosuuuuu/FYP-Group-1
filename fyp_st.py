@@ -60,7 +60,7 @@ def set_bg(img_url):
 img_url = "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Logo%20and%20Background/Background%20.png"
 set_bg(img_url)
 
-
+# Set Navigation bar style
 st.markdown("""<style>
     body {
         margin: 0;
@@ -104,6 +104,7 @@ st.markdown("""<style>
     </style>
 """, unsafe_allow_html=True)
 
+# Give names in navigation bar
 st.markdown("""<div class="top-bar">
         <a href="?page=home">Home</a>
         <a href="?page=upload-prediction">Upload logo prediction</a>
@@ -117,7 +118,7 @@ query_params = st.query_params
 page = query_params.get("page", "home")
 
 # Home Page
-if page == 'Home':
+if page == 'home':
     st.markdown(
                 """
                 <div style='text-align: center;'>
@@ -128,7 +129,7 @@ if page == 'Home':
                 unsafe_allow_html=True,
             )
 
-elif page == "upload-prediction":
+elif page == "description":
     st.title("This is the Description tab. \n")
     st.write("Recycling symbols are used to help us identify different types of packaging and if they are capable of being recycled.  \n"
         "They can be confusing, so we are here to help you make sense of them and hopefully increase what you recycle in and out of the home.")
@@ -364,8 +365,8 @@ elif page == "upload-prediction":
                     image.save(os.path.join(path, filename))
                 
             show_img = st.button('Done Cropping !')
-            save_path = "G:\My Drive\FYP Photos"
-            save_image(st.session_state.cropped_img_list, save_path)
+            # save_path = "G:\My Drive\FYP Photos"
+            # save_image(st.session_state.cropped_img_list, save_path)
         
         # Display section
         if show_img:
