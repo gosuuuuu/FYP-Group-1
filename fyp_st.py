@@ -7,6 +7,7 @@ from logo_identifier import LogoClassfier
 from streamlit_cropper import st_cropper
 from streamlit_modal import Modal
 from datetime import datetime as dt
+from pathlib import Path
 
 # Configuring the page layout
 st.set_page_config(layout="wide",
@@ -249,7 +250,6 @@ elif selected_page == "Recycle Logos":
 
 # Upload Page
 elif selected_page == "Upload logo prediction":
-    my_prediction = LogoClassfier("G:\My Drive\Poli\SEM 5\ResNet50.h5") # Change to google drive
     
     # 18 classes of logo
     classes=["tidyman", "plastic_PS", "plastic_PP",
@@ -261,7 +261,17 @@ elif selected_page == "Upload logo prediction":
 
     st.header('Do you want to know how to dispose of your rubish? We can help you with that.\n') # To insert description
     st.write('Find any recycle logo on your items and upload it!\n')
-
+    
+    def save_image(images, path, filename=None):
+        if not os.path.exists(path):
+            os.makedirs(path)
+        
+        for index, image in enumerate(images):
+            filename = f"image_{dt.now().strftime('%d%m%Y_%H%M')}_{index}.png"
+            image.save(os.path.join(path, filename))
+            
+    save_path = "G:\My Drive\FYP Photos"
+    
 # Modal
     # Creating Modal
     modal_number_logos = Modal("Number Of Logos And File",
@@ -293,46 +303,54 @@ elif selected_page == "Upload logo prediction":
             st.session_state.number_logos = st.number_input('Insert how many recycle logos you want to know',
                                            min_value=1,
                                            step=1)
-            st.session_state.uploaded_img = st.file_uploader('Insert File here into "Browse files"')
+            st.session_state.uploaded_img = st.file_uploader('Insert File here into "Browse files"',
+                                                             type=["jpg", "jpeg", "png"])
             st.write('Click "Done insert" if you are done inserting')
             done_button = st.button('Done insert!',
                                use_container_width=True)
         if done_button:
+            image = Image.open(st.session_state.uploaded_img)
+            if image.format != 'JPG':
+                if image.mode in ("RGBA", "P"):
+                    image = image.convert("RGB")
+                
+                output_path = "converted_image.jpg"
+                image.save(output_path, 'JPEG')
             modal_number_logos.close() # Modal page is closed    
         
     if st.session_state.uploaded_img is not None:
         img = Image.open(st.session_state.uploaded_img)
         st.session_state.cropped_img_list = []
         
+        if st.session_state.number_logos == 1:
+            st.session_state.cropped_img_list.append(img)
+            show_img = True
+        
+        else:
         # Crop section
-        crop_section = st.empty()
-        with crop_section.container():
-            st.write('Double click on image to save image for crop!')
-            for index in range(st.session_state.number_logos):
-                cropped_image = st_cropper(img,
-                                        realtime_update = False,
-                                        aspect_ratio = None,
-                                        key = index)
-                st.session_state.cropped_img_list.append(cropped_image)
-            
-            
-            def save_image(images, path, filename=None):
-                if not os.path.exists(path):
-                    os.makedirs(path)
+            crop_section = st.empty()
+            with crop_section.container():
+                st.write('Double click on image to save image for crop!')
+                for index in range(st.session_state.number_logos):
+                    cropped_image = st_cropper(img,
+                                            realtime_update = False,
+                                            aspect_ratio = None,
+                                            key = index)
+                    st.session_state.cropped_img_list.append(cropped_image)
                 
-                for index, image in enumerate(images):
-                    filename = f"image_{dt.now().strftime('%d%m%Y_%H%M')}_{index}.png"
-                    image.save(os.path.join(path, filename))
-                
-            show_img = st.button('Done Cropping !')
-            # save_path = "G:\My Drive\FYP Photos"
-            # save_image(st.session_state.cropped_img_list, save_path)
+                show_img = st.button('Done Cropping !')
+
+        # Save all images in list to google drive
+        save_image(st.session_state.cropped_img_list, save_path)
         
         # Display section
         if show_img:
             st.session_state.uploaded_img = None
-            crop_section.empty()
+            if st.session_state.number_logos != 1:
+                crop_section.empty()
             display_section = st.empty()
+            my_prediction = LogoClassfier("G:\My Drive\Poli\SEM 5\ResNet50.h5") # Change to google drive
+    
         
             with display_section.container():
                 for cropped_image in st.session_state.cropped_img_list:
