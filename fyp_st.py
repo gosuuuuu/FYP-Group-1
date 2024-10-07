@@ -7,7 +7,6 @@ from logo_identifier import LogoClassfier
 from streamlit_cropper import st_cropper
 from streamlit_modal import Modal
 from datetime import datetime as dt
-from pathlib import Path
 
 # Configuring the page layout
 st.set_page_config(layout="wide",
@@ -61,6 +60,7 @@ def set_bg(img_url):
 img_url = "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Logo%20and%20Background/Background%20.png"
 set_bg(img_url)
 
+# Option Menu
 selected_page = option_menu(None, ["Home", "Description", "Recycle Logos", "Upload logo prediction"],
     default_index=0, orientation="horizontal",
     icons=["house", "info-circle", "recycle", "upload"],
@@ -90,11 +90,13 @@ if selected_page == 'Home':
                 unsafe_allow_html=True,
             )
 
+# Description Page
 elif selected_page == "Description":
     st.title("This is the Description tab. \n")
     st.write("Recycling symbols are used to help us identify different types of packaging and if they are capable of being recycled.  \n"
         "They can be confusing, so we are here to help you make sense of them and hopefully increase what you recycle in and out of the home.")
-        
+
+# Recycle Logo Page        
 elif selected_page == "Recycle Logos":
     st.title("This is the Recycle Logos tab \n")
     st.write("Few logos that included in the project")
@@ -248,8 +250,18 @@ elif selected_page == "Recycle Logos":
         )
 
 
-# Upload Page
+# Upload Logo Prediction Page
 elif selected_page == "Upload logo prediction":
+    # Function to save uplaoded images to path
+    def save_image(images, path, filename=None):
+        if not os.path.exists(path):
+            os.makedirs(path)
+        for index, image in enumerate(images):
+            filename = f"image_{dt.now().strftime('%d%m%Y_%H%M')}_{index}.png"
+            image.save(os.path.join(path, filename))
+    
+    # Path to google drive
+    save_path = "G:\My Drive\FYP Photos"
     
     # 18 classes of logo
     classes=["tidyman", "plastic_PS", "plastic_PP",
@@ -259,18 +271,9 @@ elif selected_page == "Upload logo prediction":
             "period_3m", "period_9m", "mobius_logo", "fsc",
             "ce_marking", "aluminium"]
 
-    st.header('Do you want to know how to dispose of your rubish? We can help you with that.\n') # To insert description
+    st.header('Do you want to know how to dispose of your rubish? We can help you with that.\n')
     st.write('Find any recycle logo on your items and upload it!\n')
     
-    def save_image(images, path, filename=None):
-        if not os.path.exists(path):
-            os.makedirs(path)
-        
-        for index, image in enumerate(images):
-            filename = f"image_{dt.now().strftime('%d%m%Y_%H%M')}_{index}.png"
-            image.save(os.path.join(path, filename))
-            
-    save_path = "G:\My Drive\FYP Photos"
     
 # Modal
     # Creating Modal
@@ -304,11 +307,11 @@ elif selected_page == "Upload logo prediction":
                                            min_value=1,
                                            step=1)
             st.session_state.uploaded_img = st.file_uploader('Insert File here into "Browse files"',
-                                                             type=["jpg", "jpeg", "png"])
+                                                             type=["jpg", "jpeg", "png"]) # To accept only three image format
             st.write('Click "Done insert" if you are done inserting')
-            done_button = st.button('Done insert!',
-                               use_container_width=True)
-        if done_button:
+            done_button = st.button('Done insert!', use_container_width=True)
+            
+        if done_button: # if clicked
             image = Image.open(st.session_state.uploaded_img)
             if image.format != 'JPG':
                 if image.mode in ("RGBA", "P"):
@@ -325,8 +328,9 @@ elif selected_page == "Upload logo prediction":
         if st.session_state.number_logos == 1:
             st.session_state.cropped_img_list.append(img)
             show_img = True
+        # This is to immediately insert and predict the image in the display section 
         
-        else:
+        else: # if the number of logos to be detected is more than two
         # Crop section
             crop_section = st.empty()
             with crop_section.container():
@@ -337,7 +341,6 @@ elif selected_page == "Upload logo prediction":
                                             aspect_ratio = None,
                                             key = index)
                     st.session_state.cropped_img_list.append(cropped_image)
-                
                 show_img = st.button('Done Cropping !')
 
         # Save all images in list to google drive
@@ -350,15 +353,13 @@ elif selected_page == "Upload logo prediction":
                 crop_section.empty()
             display_section = st.empty()
             my_prediction = LogoClassfier("G:\My Drive\Poli\SEM 5\ResNet50.h5") # Change to google drive
-    
         
             with display_section.container():
                 for cropped_image in st.session_state.cropped_img_list:
                     loaded_img = my_prediction.load_img(cropped_image)
-                    
                     with st.container(border=True):
                         pred_class = my_prediction.model_upload(cropped_image, loaded_img)
             
         
 else:
-    st.write('Please upload an image.')
+    selected_page = "Home" # Default page
