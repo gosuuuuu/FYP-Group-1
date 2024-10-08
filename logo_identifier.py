@@ -39,6 +39,15 @@ class LogoClassfier:
                     st.image(cropped_image, use_column_width=False)
                 with col_logo[1]:   
                     st.markdown("<h2 style='text-align: center; color: grey;'>Predicted Logo</h2>", unsafe_allow_html=True)
+                    st.markdown(
+                        """
+                        <div style='text-align: center; margin: 0px 100px 50px 0px;'>
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/tidyman.png" 
+                                width="180">
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
             with st.container():
                 st.markdown("<h2 style='text-align: center; color: grey;'>Tidyman</h2>", unsafe_allow_html=True)
                 st.write('A symbol encouraging proper waste disposal. ')

@@ -353,7 +353,7 @@ elif selected_page == "Upload logo prediction":
                 crop_section.empty()
             display_section = st.empty()
             my_prediction = LogoClassfier("G:\My Drive\Poli\SEM 5\ResNet50.h5") # Change to google drive
-        
+            
             with display_section.container():
                 for cropped_image in st.session_state.cropped_img_list:
                     loaded_img = my_prediction.load_img(cropped_image)
