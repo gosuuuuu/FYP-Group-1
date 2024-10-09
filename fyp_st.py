@@ -60,64 +60,26 @@ def set_bg(img_url):
 img_url = "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Logo%20and%20Background/Background%20.png"
 set_bg(img_url)
 
-
-st.markdown("""<style>
-    body {
-        margin: 0;
-        padding: 0;
+# Option Menu
+selected_page = option_menu(None, ["Home", "Description", "Recycle Logos", "Upload logo prediction"],
+    default_index=0, orientation="horizontal",
+    icons=["house", "info-circle", "recycle", "upload"],
+    styles={
+        "container": {"padding": "0!important", 
+                       "background-color": "#cfffdd"},
+        "icon": {"color": "green", 
+                 "font-size": "20px"}, 
+        "nav-link": {"font-size": "24px",
+                     "font-family": "arial" ,
+                     "text-align": "center", 
+                     "margin":"0px", 
+                     "--hover-color": "#eee"},
+        "nav-link-selected": {"background-color": "#19c24a"},
     }
-    .top-bar {
-        background-color: #80ed99;
-        padding: 0;
-        margin: 0;
-        position: fixed;
-        top: 80px;
-        left: 0;
-        right: 0;
-        width: 100%;
-        height: 70px;
-        z-index: 1000;
-        border-bottom: 2px solid #e0e0e0;
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-    }
-    .top-bar a {
-        padding: 15px;
-        text-decoration: none;
-        color: #000;
-        font-weight: bold;
-        flex: 1;
-        text-align: center;
-    }
-    .top-bar a:hover {
-        color: #DAD7CD;
-    }
-    .container {
-        margin-top: 110px;
-        padding: 20px;
-    }
-    .logo {
-        text-align: center;
-        margin-top: 0px;
-    }
-    </style>
-""", unsafe_allow_html=True)
-
-st.markdown("""<div class="top-bar">
-        <a href="?page=home">Home</a>
-        <a href="?page=upload-prediction">Upload logo prediction</a>
-        <a href="?page=description">Description</a>
-        <a href="?page=recycle-logos">Recycle Logos</a>
-    </div>
-""", unsafe_allow_html=True)
-
-# Get the query parameters
-query_params = st.query_params
-page = query_params.get("page", "home")
+)
 
 # Home Page
-if page == 'Home':
+if selected_page == 'Home':
     st.markdown(
                 """
                 <div style='text-align: center;'>
@@ -128,12 +90,14 @@ if page == 'Home':
                 unsafe_allow_html=True,
             )
 
-elif page == "upload-prediction":
+# Description Page
+elif selected_page == "Description":
     st.title("This is the Description tab. \n")
     st.write("Recycling symbols are used to help us identify different types of packaging and if they are capable of being recycled.  \n"
         "They can be confusing, so we are here to help you make sense of them and hopefully increase what you recycle in and out of the home.")
-        
-elif page == "recycle-logos":
+
+# Recycle Logo Page        
+elif selected_page == "Recycle Logos":
     st.title("This is the Recycle Logos tab \n")
     st.write("Few logos that included in the project")
 
@@ -286,9 +250,18 @@ elif page == "recycle-logos":
         )
 
 
-# Upload Page
-elif page == "upload-prediction":
-    my_prediction = LogoClassfier("G:\My Drive\Poli\SEM 5\ResNet50.h5") # Change to google drive
+# Upload Logo Prediction Page
+elif selected_page == "Upload logo prediction":
+    # Function to save uplaoded images to path
+    def save_image(images, path, filename=None):
+        if not os.path.exists(path):
+            os.makedirs(path)
+        for index, image in enumerate(images):
+            filename = f"image_{dt.now().strftime('%d%m%Y_%H%M')}_{index}.png"
+            image.save(os.path.join(path, filename))
+    
+    # Path to google drive
+    save_path = "G:\My Drive\FYP Photos"
     
     # 18 classes of logo
     classes=["tidyman", "plastic_PS", "plastic_PP",
@@ -298,9 +271,10 @@ elif page == "upload-prediction":
             "period_3m", "period_9m", "mobius_logo", "fsc",
             "ce_marking", "aluminium"]
 
-    st.header('Do you want to know how to dispose of your rubish? We can help you with that.\n') # To insert description
+    st.header('Do you want to know how to dispose of your rubish? We can help you with that.\n')
     st.write('Find any recycle logo on your items and upload it!\n')
-
+    
+    
 # Modal
     # Creating Modal
     modal_number_logos = Modal("Number Of Logos And File",
@@ -332,54 +306,60 @@ elif page == "upload-prediction":
             st.session_state.number_logos = st.number_input('Insert how many recycle logos you want to know',
                                            min_value=1,
                                            step=1)
-            st.session_state.uploaded_img = st.file_uploader('Insert File here into "Browse files"')
+            st.session_state.uploaded_img = st.file_uploader('Insert File here into "Browse files"',
+                                                             type=["jpg", "jpeg", "png"]) # To accept only three image format
             st.write('Click "Done insert" if you are done inserting')
-            done_button = st.button('Done insert!',
-                               use_container_width=True)
-        if done_button:
+            done_button = st.button('Done insert!', use_container_width=True)
+            
+        if done_button: # if clicked
+            image = Image.open(st.session_state.uploaded_img)
+            if image.format != 'JPG':
+                if image.mode in ("RGBA", "P"):
+                    image = image.convert("RGB")
+                
+                output_path = "converted_image.jpg"
+                image.save(output_path, 'JPEG')
             modal_number_logos.close() # Modal page is closed    
         
     if st.session_state.uploaded_img is not None:
         img = Image.open(st.session_state.uploaded_img)
         st.session_state.cropped_img_list = []
         
+        if st.session_state.number_logos == 1:
+            st.session_state.cropped_img_list.append(img)
+            show_img = True
+        # This is to immediately insert and predict the image in the display section 
+        
+        else: # if the number of logos to be detected is more than two
         # Crop section
-        crop_section = st.empty()
-        with crop_section.container():
-            st.write('Double click on image to save image for crop!')
-            for index in range(st.session_state.number_logos):
-                cropped_image = st_cropper(img,
-                                        realtime_update = False,
-                                        aspect_ratio = None,
-                                        key = index)
-                st.session_state.cropped_img_list.append(cropped_image)
-            
-            
-            def save_image(images, path, filename=None):
-                if not os.path.exists(path):
-                    os.makedirs(path)
-                
-                for index, image in enumerate(images):
-                    filename = f"image_{dt.now().strftime('%d%m%Y_%H%M')}_{index}.png"
-                    image.save(os.path.join(path, filename))
-                
-            show_img = st.button('Done Cropping !')
-            save_path = "G:\My Drive\FYP Photos"
-            save_image(st.session_state.cropped_img_list, save_path)
+            crop_section = st.empty()
+            with crop_section.container():
+                st.write('Double click on image to save image for crop!')
+                for index in range(st.session_state.number_logos):
+                    cropped_image = st_cropper(img,
+                                            realtime_update = False,
+                                            aspect_ratio = None,
+                                            key = index)
+                    st.session_state.cropped_img_list.append(cropped_image)
+                show_img = st.button('Done Cropping !')
+
+        # Save all images in list to google drive
+        save_image(st.session_state.cropped_img_list, save_path)
         
         # Display section
         if show_img:
             st.session_state.uploaded_img = None
-            crop_section.empty()
+            if st.session_state.number_logos != 1:
+                crop_section.empty()
             display_section = st.empty()
-        
+            my_prediction = LogoClassfier("G:\My Drive\Poli\SEM 5\ResNet50.h5") # Change to google drive
+            
             with display_section.container():
                 for cropped_image in st.session_state.cropped_img_list:
                     loaded_img = my_prediction.load_img(cropped_image)
-                    
                     with st.container(border=True):
                         pred_class = my_prediction.model_upload(cropped_image, loaded_img)
             
         
 else:
-    st.write('Please upload an image.')
+    selected_page = "Home" # Default page
