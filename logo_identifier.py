@@ -13,7 +13,6 @@ class LogoClassfier:
                         "period_24m", "period_12m", "period_6m",
                         "period_3m", "period_9m", "mobius_logo", "fsc",
                         "ce_marking", "aluminium"] # 18 classes
-
     
     def load_img (self, img):
         img = img.resize((224,224))
@@ -23,25 +22,32 @@ class LogoClassfier:
         img_tensor = tf.expand_dims(img_tensor,
                                     axis=0)
         return img_tensor
-    
-    
+
     def model_upload(self, cropped_image, loaded_img):
         prediction = self.model.predict(loaded_img)
         pred_class = self.classes[np.argmax(prediction)]
 
-        cropped_image = cropped_image.resize((224,224))
+        cropped_image = cropped_image.resize((224,224))  
         
         if pred_class == "tidyman":
             with st.container(border=True):
                 col_logo = st.columns(2)
                 with col_logo[0]:
                     st.markdown("<h2 style='text-align: center; color: grey;'>Uploaded Picture</h2>", unsafe_allow_html=True)
-                    st.image(cropped_image, use_column_width=False)
+                    st.markdown(
+                        """
+                        <div style="display: flex; justify-content: center;">
+                            <img src="data:image/png;base64,{cropped_image}" style="width: 224px; height: 224px;">
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
+                    #st.image(cropped_image, use_column_width=False)
                 with col_logo[1]:   
                     st.markdown("<h2 style='text-align: center; color: grey;'>Predicted Logo</h2>", unsafe_allow_html=True)
                     st.markdown(
                         """
-                        <div style='text-align: center; margin: 0px 100px 50px 0px;'>
+                        <<div style='text-align: center; margin: 0px 0px 100px 0px;'>
                             <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/tidyman.png" 
                                 width="180">
                         </div>
@@ -62,6 +68,15 @@ class LogoClassfier:
                     st.image(cropped_image, use_column_width=False)
                 with col_logo[1]:   
                     st.markdown("<h2 style='text-align: center; color: grey;'>Predicted Logo</h2>", unsafe_allow_html=True)
+                    st.markdown(
+                        """
+                        <div style='text-align: center; margin: 0px 0px 100px 0px;'>
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/plastic.png"  
+                                width="200">
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
             with st.container():
                 st.markdown("<h2 style='text-align: center; color: grey;'>Plastic Logo 6 - PS</h2>", unsafe_allow_html=True)
                 st.write('Often used for disposable cutlery and foam containers. It is not easily recyclable.') 
@@ -77,6 +92,15 @@ class LogoClassfier:
                     st.image(cropped_image, use_column_width=False)
                 with col_logo[1]:   
                     st.markdown("<h2 style='text-align: center; color: grey;'>Predicted Logo</h2>", unsafe_allow_html=True)
+                    st.markdown(
+                        """
+                        <div style='text-align: center; margin: 0px 0px 100px 0px;'>
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/plastic.png"  
+                                width="200">
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
             with st.container():
                 st.markdown("<h2 style='text-align: center; color: grey;'>Plastic Logo 5 - PP</h2>", unsafe_allow_html=True)
                 st.write('A Recycable plastic used for containers, straws, and some packaging.') 
@@ -92,6 +116,15 @@ class LogoClassfier:
                     st.image(cropped_image, use_column_width=False)
                 with col_logo[1]:   
                     st.markdown("<h2 style='text-align: center; color: grey;'>Predicted Logo</h2>", unsafe_allow_html=True)
+                    st.markdown(
+                        """
+                        <div style='text-align: center; margin: 0px 0px 100px 0px;'>
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/plastic.png"  
+                                width="200">
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
             with st.container():
                 st.markdown("<h2 style='text-align: center; color: grey;'>Plastic Logo 1 - PET</h2>", unsafe_allow_html=True)
                 st.write('A Recycable plastic used for containers, straws, and some packaging.') 
@@ -107,6 +140,15 @@ class LogoClassfier:
                     st.image(cropped_image, use_column_width=False)
                 with col_logo[1]:   
                     st.markdown("<h2 style='text-align: center; color: grey;'>Predicted Logo</h2>", unsafe_allow_html=True)
+                    st.markdown(
+                        """
+                        <div style='text-align: center; margin: 0px 0px 100px 0px;'>
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/plastic.png"  
+                                width="200">
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
             with st.container():
                 st.markdown("<h2 style='text-align: center; color: grey;'>Plastic Logo 20, 21, 22 - PAP</h2>", unsafe_allow_html=True)
                 st.write('Depends on local facilities it is recycable , it is used in various applications, including textiles and packaging. ') 
@@ -122,6 +164,15 @@ class LogoClassfier:
                     st.image(cropped_image, use_column_width=False)
                 with col_logo[1]:   
                     st.markdown("<h2 style='text-align: center; color: grey;'>Predicted Logo</h2>", unsafe_allow_html=True)
+                    st.markdown(
+                        """
+                        <div style='text-align: center; margin: 0px 0px 100px 0px;'>
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/plastic.png"  
+                                width="200">
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
             with st.container():
                 st.markdown("<h2 style='text-align: center; color: grey;'>Plastic Logo 7 - Other</h2>", unsafe_allow_html=True)
                 st.write('Depends on the specific type; check local guidelines it is recycable. This logo covers various types of plastic that do not fit into the other categories.  ') 
@@ -137,6 +188,15 @@ class LogoClassfier:
                     st.image(cropped_image, use_column_width=False)
                 with col_logo[1]:   
                     st.markdown("<h2 style='text-align: center; color: grey;'>Predicted Logo</h2>", unsafe_allow_html=True)
+                    st.markdown(
+                        """
+                        <div style='text-align: center; margin: 0px 0px 100px 0px;'>
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/plastic.png"  
+                                width="200">
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
             with st.container():
                 st.markdown("<h2 style='text-align: center; color: grey;'>Plastic Logo 4 - LDPE</h2>", unsafe_allow_html=True)
                 st.write('Often used for plastic bags and some containers. Yes it is recycable, but only at specific facilities. ') 
@@ -152,6 +212,15 @@ class LogoClassfier:
                     st.image(cropped_image, use_column_width=False)
                 with col_logo[1]:   
                     st.markdown("<h2 style='text-align: center; color: grey;'>Predicted Logo</h2>", unsafe_allow_html=True)
+                    st.markdown(
+                        """
+                        <div style='text-align: center; margin: 0px 0px 100px 0px;'>
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/plastic.png"  
+                                width="200">
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
             with st.container():
                 st.markdown("<h2 style='text-align: center; color: grey;'>Plastic Logo 2 - HDPE</h2>", unsafe_allow_html=True)
                 st.write('Commonly used for containers like milk jugs and detergent bottles. Yes, it is recycable ') 
@@ -167,6 +236,15 @@ class LogoClassfier:
                     st.image(cropped_image, use_column_width=False)
                 with col_logo[1]:   
                     st.markdown("<h2 style='text-align: center; color: grey;'>Predicted Logo</h2>", unsafe_allow_html=True)
+                    st.markdown(
+                        """
+                        <div style='text-align: center; margin: 0px 0px 100px 0px;'>
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/pao.png"  
+                                width="200">
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
             with st.container():
                 st.markdown("<h2 style='text-align: center; color: grey;'>Period of Opening - 36 Months</h2>", unsafe_allow_html=True)
                 st.write('This logo indicates the product should be used within thirty-six months after opening. Depending on the material it is recycable') 
@@ -181,6 +259,15 @@ class LogoClassfier:
                     st.image(cropped_image, use_column_width=False)
                 with col_logo[1]:   
                     st.markdown("<h2 style='text-align: center; color: grey;'>Predicted Logo</h2>", unsafe_allow_html=True)
+                    st.markdown(
+                        """
+                        <div style='text-align: center; margin: 0px 0px 100px 0px;'>
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/pao.png"  
+                                width="200">
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
             with st.container():
                 st.markdown("<h2 style='text-align: center; color: grey;'>Period of Opening - 24 Months</h2>", unsafe_allow_html=True)
                 st.write('This logo Indicates the product should be used within twenty-four months after opening. Depending on the material it is recycable') 
@@ -195,6 +282,15 @@ class LogoClassfier:
                     st.image(cropped_image, use_column_width=False)
                 with col_logo[1]:   
                     st.markdown("<h2 style='text-align: center; color: grey;'>Predicted Logo</h2>", unsafe_allow_html=True)
+                    st.markdown(
+                        """
+                        <div style='text-align: center; margin: 0px 0px 100px 0px;'>
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/pao.png"  
+                                width="200">
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
             with st.container():
                 st.markdown("<h2 style='text-align: center; color: grey;'>Period of Opening - 12 Months</h2>", unsafe_allow_html=True)
                 st.write('This logo indicates the product should be used within twelve months after opening. Depending on the material it is recycable') 
@@ -209,6 +305,15 @@ class LogoClassfier:
                     st.image(cropped_image, use_column_width=False)
                 with col_logo[1]:   
                     st.markdown("<h2 style='text-align: center; color: grey;'>Predicted Logo</h2>", unsafe_allow_html=True)
+                    st.markdown(
+                        """
+                        <div style='text-align: center; margin: 0px 0px 100px 0px;'>
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/pao.png"  
+                                width="200">
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
             with st.container():
                 st.markdown("<h2 style='text-align: center; color: grey;'>Period of Opening - 9 Months</h2>", unsafe_allow_html=True)
                 st.write('This logo indicates the product should be used within nine months after opening. Depending on the material it is recycable') 
@@ -223,6 +328,15 @@ class LogoClassfier:
                     st.image(cropped_image, use_column_width=False)
                 with col_logo[1]:   
                     st.markdown("<h2 style='text-align: center; color: grey;'>Predicted Logo</h2>", unsafe_allow_html=True)
+                    st.markdown(
+                        """
+                        <div style='text-align: center; margin: 0px 0px 100px 0px;'>
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/pao.png"  
+                                width="200">
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
             with st.container():
                 st.markdown("<h2 style='text-align: center; color: grey;'>Period of Opening - 6 Months</h2>", unsafe_allow_html=True)
                 st.write('This logo indicates the product should be used within six months after opening. Depending on the material it is recycable') 
@@ -237,6 +351,15 @@ class LogoClassfier:
                     st.image(cropped_image, use_column_width=False)
                 with col_logo[1]:   
                     st.markdown("<h2 style='text-align: center; color: grey;'>Predicted Logo</h2>", unsafe_allow_html=True)
+                    st.markdown(
+                        """
+                        <div style='text-align: center; margin: 0px 0px 100px 0px;'>
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/pao.png"  
+                                width="200">
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
             with st.container():
                 st.markdown("<h2 style='text-align: center; color: grey;'>Period of Opening - 3 Months</h2>", unsafe_allow_html=True)
                 st.write('This logo indicates the product should be used within three months after opening. Depending on the material it is recycable') 
@@ -251,6 +374,15 @@ class LogoClassfier:
                     st.image(cropped_image, use_column_width=False)
                 with col_logo[1]:   
                     st.markdown("<h2 style='text-align: center; color: grey;'>Predicted Logo</h2>", unsafe_allow_html=True)
+                    st.markdown(
+                    """
+                    <div style='text-align: center; margin: 0px 0px 100px 0px;'>
+                        <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/mobiusloop.png" 
+                            width="180">
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
             with st.container():
                 st.markdown("<h2 style='text-align: center; color: grey;'>Mobius Logo</h2>", unsafe_allow_html=True)
                 st.write('This logo represents that the product is recyclable. ') 
@@ -266,6 +398,15 @@ class LogoClassfier:
                     st.image(cropped_image, use_column_width=False)
                 with col_logo[1]:   
                     st.markdown("<h2 style='text-align: center; color: grey;'>Predicted Logo</h2>", unsafe_allow_html=True)
+                    st.markdown(
+                        """
+                        <div style='text-align: center; margin: 0px 0px 100px 0px;'>
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/fsc.png" 
+                                width="170">
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
             with st.container():
                 st.markdown("<h2 style='text-align: center; color: grey;'>Forest Stewardship Council (FSC)</h2>", unsafe_allow_html=True)
                 st.write('This logo certifies that the wood or paper products come from responsibly managed forests. It is recycable ') 
@@ -281,6 +422,15 @@ class LogoClassfier:
                     st.image(cropped_image, use_column_width=False)
                 with col_logo[1]:   
                     st.markdown("<h2 style='text-align: center; color: grey;'>Predicted Logo</h2>", unsafe_allow_html=True)
+                    st.markdown(
+                    """
+                    <div style='text-align: center; margin: 0px 0px 100px 0px;'>
+                        <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/ce.png"  
+                            width="230">
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
             with st.container():
                 st.markdown("<h2 style='text-align: center; color: grey;'>CE Mark</h2>", unsafe_allow_html=True)
                 st.write('This logo indicates conformity with health, safety, and environmental protection standards for products sold within the European Economic Area. this is not a recycling logo.') 
@@ -295,6 +445,16 @@ class LogoClassfier:
                     st.image(cropped_image, use_column_width=False)
                 with col_logo[1]:   
                     st.markdown("<h2 style='text-align: center; color: grey;'>Predicted Logo</h2>", unsafe_allow_html=True)
+                    st.markdown(
+                        """
+                        <div style='text-align: center; margin: 0px 0px 100px 0px;'>
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/aluminium.png" 
+                                alt="Aluminium Logo" 
+                                width="180">
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
+                    )
             with st.container():
                 st.markdown("<h2 style='text-align: center; color: grey;'>Aluminium</h2>", unsafe_allow_html=True)
                 st.write('This logo indicates that the item is made from aluminum, a highly recyclable material. due to this it is recycable') 

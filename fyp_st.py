@@ -61,7 +61,7 @@ img_url = "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Logo%20an
 set_bg(img_url)
 
 # Option Menu
-selected_page = option_menu(None, ["Home", "Description", "Recycle Logos", "Upload logo prediction"],
+selected_page = option_menu(None, ["Home", "Description", "Recycle Logos", "Logo prediction"],
     default_index=0, orientation="horizontal",
     icons=["house", "info-circle", "recycle", "upload"],
     styles={
@@ -251,7 +251,7 @@ elif selected_page == "Recycle Logos":
 
 
 # Upload Logo Prediction Page
-elif selected_page == "Upload logo prediction":
+elif selected_page == "Logo prediction":
     # Function to save uplaoded images to path
     def save_image(images, path, filename=None):
         if not os.path.exists(path):
@@ -261,7 +261,8 @@ elif selected_page == "Upload logo prediction":
             image.save(os.path.join(path, filename))
     
     # Path to google drive
-    save_path = "G:\My Drive\FYP Photos"
+    #save_path = "G:\My Drive\FYP Photos"
+    save_path = "G:\My Drive\FYP2024\FYP Photos"
     
     # 18 classes of logo
     classes=["tidyman", "plastic_PS", "plastic_PP",
@@ -352,8 +353,10 @@ elif selected_page == "Upload logo prediction":
             if st.session_state.number_logos != 1:
                 crop_section.empty()
             display_section = st.empty()
-            my_prediction = LogoClassfier("G:\My Drive\Poli\SEM 5\ResNet50.h5") # Change to google drive
+            #my_prediction = LogoClassfier("G:\My Drive\Poli\SEM 5\ResNet50.h5") # Change to google drive
+            my_prediction = LogoClassfier("G:\My Drive\FYP2024\ResNet50.h5")
             
+
             with display_section.container():
                 for cropped_image in st.session_state.cropped_img_list:
                     loaded_img = my_prediction.load_img(cropped_image)
