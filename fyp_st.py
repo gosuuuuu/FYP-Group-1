@@ -4,9 +4,9 @@ import os
 from PIL import Image
 from streamlit_option_menu import option_menu
 from logo_identifier import LogoClassfier
-from streamlit_cropper import st_cropper
 from streamlit_modal import Modal
 from datetime import datetime as dt
+from streamlit_cropper import st_cropper
 
 # Configuring the page layout
 st.set_page_config(layout="wide",
@@ -92,14 +92,14 @@ if selected_page == 'Home':
 
 # Description Page
 elif selected_page == "Description":
-    st.title("This is the Description tab. \n")
+    st.title("This is the Description tab.")
     st.write("Recycling symbols are used to help us identify different types of packaging and if they are capable of being recycled.  \n"
         "They can be confusing, so we are here to help you make sense of them and hopefully increase what you recycle in and out of the home.")
 
 # Recycle Logo Page        
 elif selected_page == "Recycle Logos":
-    st.title("This is the Recycle Logos tab \n")
-    st.write("Few logos that included in the project")
+    st.title("This is the Recycle Logos tab.")
+    st.write("In this website, the logos below are the only logos that can be detected as on 16 October 2024.")
 
     col1, col2, col3, col4 = st.columns([3,6,3,6])
 
@@ -353,8 +353,8 @@ elif selected_page == "Logo prediction":
             if st.session_state.number_logos != 1:
                 crop_section.empty()
             display_section = st.empty()
-            #my_prediction = LogoClassfier("G:\My Drive\Poli\SEM 5\ResNet50.h5") # Change to google drive
-            my_prediction = LogoClassfier("G:\My Drive\FYP2024\ResNet50.h5")
+            my_prediction = LogoClassfier("G:\My Drive\Poli\SEM 5\ResNet50.h5") # Change to google drive
+            #my_prediction = LogoClassfier("G:\My Drive\FYP2024\ResNet50.h5")
             
 
             with display_section.container():
