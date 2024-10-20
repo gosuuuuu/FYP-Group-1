@@ -3,7 +3,6 @@ import numpy as np
 import tensorflow as tf
 import streamlit as st
 
-
 class LogoClassfier:
     def __init__(self, model_path):
         self.model = tf.keras.models.load_model(model_path)
@@ -13,7 +12,7 @@ class LogoClassfier:
                         "period_24m", "period_12m", "period_6m",
                         "period_3m", "period_9m", "mobius_logo", "fsc",
                         "ce_marking", "aluminium"] # 18 classes
-    
+
     def load_img (self, img):
         img = img.resize((224,224))
         img_array = np.array(img)
@@ -27,22 +26,14 @@ class LogoClassfier:
         prediction = self.model.predict(loaded_img)
         pred_class = self.classes[np.argmax(prediction)]
 
-        cropped_image = cropped_image.resize((224,224))  
+        cropped_image = cropped_image.resize((224,224))
         
         if pred_class == "tidyman":
             with st.container(border=True):
                 col_logo = st.columns(2)
                 with col_logo[0]:
                     st.markdown("<h2 style='text-align: center; color: grey;'>Uploaded Picture</h2>", unsafe_allow_html=True)
-                    st.markdown(
-                        """
-                        <div style="display: flex; justify-content: center;">
-                            <img src="data:image/png;base64,{cropped_image}" style="width: 224px; height: 224px;">
-                        </div>
-                        """,
-                        unsafe_allow_html=True,
-                    )
-                    #st.image(cropped_image, use_column_width=False)
+                    st.image(cropped_image, use_column_width=False)
                 with col_logo[1]:   
                     st.markdown("<h2 style='text-align: center; color: grey;'>Predicted Logo</h2>", unsafe_allow_html=True)
                     st.markdown(
@@ -71,7 +62,7 @@ class LogoClassfier:
                     st.markdown(
                         """
                         <div style='text-align: center; margin: 0px 0px 100px 0px;'>
-                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/plastic.png"  
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/plastic_PS.png"  
                                 width="200">
                         </div>
                         """,
@@ -96,8 +87,8 @@ class LogoClassfier:
                     st.markdown(
                         """
                         <div style='text-align: center; margin: 0px 0px 100px 0px;'>
-                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/plastic.png"  
-                                width="200">
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/plastic_PP.png"  
+                                width="300">
                         </div>
                         """,
                         unsafe_allow_html=True,
@@ -121,7 +112,7 @@ class LogoClassfier:
                     st.markdown(
                         """
                         <div style='text-align: center; margin: 0px 0px 100px 0px;'>
-                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/plastic.png"  
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/plastic_PET.png"  
                                 width="200">
                         </div>
                         """,
@@ -146,8 +137,8 @@ class LogoClassfier:
                     st.markdown(
                         """
                         <div style='text-align: center; margin: 0px 0px 100px 0px;'>
-                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/plastic.png"  
-                                width="200">
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/plastic_PAP.png"  
+                                width="300">
                         </div>
                         """,
                         unsafe_allow_html=True,
@@ -171,7 +162,7 @@ class LogoClassfier:
                     st.markdown(
                         """
                         <div style='text-align: center; margin: 0px 0px 100px 0px;'>
-                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/plastic.png"  
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/plastic_other.png"  
                                 width="200">
                         </div>
                         """,
@@ -196,7 +187,7 @@ class LogoClassfier:
                     st.markdown(
                         """
                         <div style='text-align: center; margin: 0px 0px 100px 0px;'>
-                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/plastic.png"  
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/plastic_LDPE.png"  
                                 width="200">
                         </div>
                         """,
@@ -221,7 +212,7 @@ class LogoClassfier:
                     st.markdown(
                         """
                         <div style='text-align: center; margin: 0px 0px 100px 0px;'>
-                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/plastic.png"  
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/plastic_HDPE.png"  
                                 width="200">
                         </div>
                         """,
@@ -246,7 +237,7 @@ class LogoClassfier:
                     st.markdown(
                         """
                         <div style='text-align: center; margin: 0px 0px 100px 0px;'>
-                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/pao.png"  
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/period_36m.png"  
                                 width="200">
                         </div>
                         """,
@@ -269,7 +260,7 @@ class LogoClassfier:
                     st.markdown(
                         """
                         <div style='text-align: center; margin: 0px 0px 100px 0px;'>
-                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/pao.png"  
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/period_24m.png"  
                                 width="200">
                         </div>
                         """,
@@ -292,7 +283,7 @@ class LogoClassfier:
                     st.markdown(
                         """
                         <div style='text-align: center; margin: 0px 0px 100px 0px;'>
-                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/pao.png"  
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/period_12m.png"  
                                 width="200">
                         </div>
                         """,
@@ -315,7 +306,7 @@ class LogoClassfier:
                     st.markdown(
                         """
                         <div style='text-align: center; margin: 0px 0px 100px 0px;'>
-                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/pao.png"  
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/period_9m.png"  
                                 width="200">
                         </div>
                         """,
@@ -338,7 +329,7 @@ class LogoClassfier:
                     st.markdown(
                         """
                         <div style='text-align: center; margin: 0px 0px 100px 0px;'>
-                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/pao.png"  
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/period_6m.png"  
                                 width="200">
                         </div>
                         """,
@@ -361,7 +352,7 @@ class LogoClassfier:
                     st.markdown(
                         """
                         <div style='text-align: center; margin: 0px 0px 100px 0px;'>
-                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/pao.png"  
+                            <img src="https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Recycle%20Logo/period_3m.png"  
                                 width="200">
                         </div>
                         """,
