@@ -61,9 +61,9 @@ img_url = "https://raw.githubusercontent.com/gosuuuuu/FYP-Group-1/main/Logo%20an
 set_bg(img_url)
 
 # Option Menu
-selected_page = option_menu(None, ["Home", "Description", "Recycle Logos", "Logo prediction"],
+selected_page = option_menu(None, ["Home", "Recycle Logos", "Logo prediction"],
     default_index=0, orientation="horizontal",
-    icons=["house", "info-circle", "recycle", "upload"],
+    icons=["house", "recycle", "upload"],
     styles={
         "container": {"padding": "0!important", 
                        "background-color": "#cfffdd"},
@@ -89,12 +89,8 @@ if selected_page == 'Home':
                 """,
                 unsafe_allow_html=True,
             )
-
-# Description Page
-elif selected_page == "Description":
-    st.title("This is the Description tab.")
-    st.write("Recycling symbols are used to help us identify different types of packaging and if they are capable of being recycled.  \n"
-        "They can be confusing, so we are here to help you make sense of them and hopefully increase what you recycle in and out of the home.")
+    st.markdown("<h2 style='text-align: center; color: grey;'>Recycling symbols are used to help us identify different types of packaging and if they are capable of being recycled.</h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center; color: grey;'>They can be confusing, so we are here to help you make sense of them and practice the three R's in and out of the home!</h2>", unsafe_allow_html=True)
 
 # Recycle Logo Page        
 elif selected_page == "Recycle Logos":
@@ -328,21 +324,29 @@ elif selected_page == "Logo prediction":
         
         if st.session_state.number_logos == 1:
             st.session_state.cropped_img_list.append(img)
-            show_img = True
-        # This is to immediately insert and predict the image in the display section 
-        
+            show_img = True # To immediately insert and predict the image in the display section
+             
         else: # if the number of logos to be detected is more than two
         # Crop section
             crop_section = st.empty()
-            with crop_section.container():
-                st.write('Double click on image to save image for crop!')
+            with crop_section.container(border=True):
+                st.markdown("<h1 style='text-align: center; color: grey;'>Make sure to double click in the box of image to be cropped!</h1>", unsafe_allow_html=True)
                 for index in range(st.session_state.number_logos):
-                    cropped_image = st_cropper(img,
-                                            realtime_update = False,
-                                            aspect_ratio = None,
-                                            key = index)
+                    with st.container():
+                        col_crop = st.columns(2)
+                        with col_crop[0]:
+                            st.markdown("<h2 style='text-align: center; color: grey;'>Image To Be Cropped</h2>", unsafe_allow_html=True)
+                            cropped_image = st_cropper(img,
+                                                    realtime_update = False,
+                                                    aspect_ratio = None,
+                                                    key = index)
+                        with col_crop[1]:
+                            st.markdown("<h2 style='text-align: center; color: grey;'>Cropped Image</h2>", unsafe_allow_html=True)
+                            st.image(cropped_image)
+                        st.divider()
                     st.session_state.cropped_img_list.append(cropped_image)
-                show_img = st.button('Done Cropping !')
+                show_img = st.button('Done Cropping !',
+                                     use_container_width=True)
 
         
         # Display section
