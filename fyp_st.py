@@ -257,7 +257,7 @@ elif selected_page == "Logo prediction":
         if not os.path.exists(path):
             os.makedirs(path)
         for index, image in enumerate(images):
-            filename = f"image_{dt.now().strftime('%d%m%Y_%H%M')}_{index}.png"
+            filename = f"image_{dt.now().strftime('%d%m%Y_%H%M%S')}_{index}.png"
             image.save(os.path.join(path, filename))
     
     # Path to google drive
@@ -344,11 +344,10 @@ elif selected_page == "Logo prediction":
                     st.session_state.cropped_img_list.append(cropped_image)
                 show_img = st.button('Done Cropping !')
 
-        # Save all images in list to google drive
-        save_image(st.session_state.cropped_img_list, save_path)
         
         # Display section
         if show_img:
+            save_image(st.session_state.cropped_img_list, save_path)
             st.session_state.uploaded_img = None
             if st.session_state.number_logos != 1:
                 crop_section.empty()
