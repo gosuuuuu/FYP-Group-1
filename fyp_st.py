@@ -338,8 +338,9 @@ elif selected_page == "Logo prediction":
                             st.markdown("<h2 style='text-align: center; color: grey;'>Image To Be Cropped</h2>", unsafe_allow_html=True)
                             cropped_image = st_cropper(img,
                                                     realtime_update = False,
-                                                    aspect_ratio = None,
-                                                    key = index)
+                                                    aspect_ratio = (1,1),
+                                                    key = index,
+                                                    should_resize_image=True)
                         with col_crop[1]:
                             st.markdown("<h2 style='text-align: center; color: grey;'>Cropped Image</h2>", unsafe_allow_html=True)
                             st.image(cropped_image)
@@ -356,8 +357,8 @@ elif selected_page == "Logo prediction":
             if st.session_state.number_logos != 1:
                 crop_section.empty()
             display_section = st.empty()
-            #my_prediction = LogoClassfier("G:\My Drive\Poli\SEM 5\ResNet50.h5") #Aina
-            my_prediction = LogoClassfier("G:\My Drive\FYP2024\ResNet50.h5") #Naaim
+            my_prediction = LogoClassfier("G:\My Drive\Poli\SEM 5\ResNet50.h5") #Aina
+            #my_prediction = LogoClassfier("G:\My Drive\FYP2024\ResNet50.h5") #Naaim
             
 
             with display_section.container():
