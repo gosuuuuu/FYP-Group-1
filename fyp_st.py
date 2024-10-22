@@ -141,6 +141,7 @@ elif selected_page == "Recycle Logos":
             This indicates conformity with health, safety, and environmental protection standards for products sold within the European Economic Area.  
             """
         )
+        st.link_button("Visit The Green Depot", "https://www.instagram.com/greendepotbn")
 
     col5, col6, col7, col8 = st.columns([3,6,3,6])
 
@@ -204,6 +205,7 @@ elif selected_page == "Recycle Logos":
             The period-after-opening (PAO) symbol highlights the amount of time a cosmetic product will remain safe for use after being opened for the first time. It depicts an open cosmetics pot and is used together with a written number of months or years.  
             """
         )
+        st.link_button("Visit The Green Depot", "https://www.instagram.com/greendepotbn")
 
     with col11:
         st.markdown(
@@ -223,6 +225,7 @@ elif selected_page == "Recycle Logos":
             These symbols help consumers to identify different types of plastic resin used to make the product.They were applied to help assist with the sorting of plastics. Like many materials plastics should be recycled separately, so the value of the of the recycled material is preserved. Allowing it to be reused to make new products.  
             """
         )
+        st.link_button("Visit The Green Depot", "https://www.instagram.com/greendepotbn")
 
     col13, col14, col15, col16 = st.columns([3,6,3,6])
 
@@ -244,6 +247,7 @@ elif selected_page == "Recycle Logos":
                 This symbol is a reminder to dispose of waste responsibly. It encourages consumers to throw their trash into appropriate trash cans, helping to keep the environment clean. While not a recycling logo, it promotes good waste management practices.  
             """
         )
+        st.link_button("Visit The Green Depot", "https://www.instagram.com/greendepotbn")
 
 
 # Upload Logo Prediction Page
