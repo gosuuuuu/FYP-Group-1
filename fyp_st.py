@@ -361,7 +361,7 @@ elif selected_page == "Logo prediction":
             if st.session_state.number_logos != 1:
                 crop_section.empty()
             display_section = st.empty()
-            my_prediction = LogoClassfier("G:\My Drive\Poli\SEM 5\ResNet50.h5") #Aina
+            my_prediction = LogoClassfier("G:\My Drive\Poli\SEM 5\ResNet50V2.h5") #Aina
             #my_prediction = LogoClassfier("G:\My Drive\FYP2024\ResNet50.h5") #Naaim
             
 
