@@ -261,7 +261,7 @@ elif selected_page == "Logo prediction":
             image.save(os.path.join(path, filename))
     
     # Path to google drive
-    #save_path = "G:\My Drive\FYP Photos"
+    # To set own google drive path when linked to laptop
     save_path = "G:\My Drive\FYP2024\FYP Photos"
     
     # 18 classes of logo
@@ -361,9 +361,10 @@ elif selected_page == "Logo prediction":
             if st.session_state.number_logos != 1:
                 crop_section.empty()
             display_section = st.empty()
-            #my_prediction = LogoClassfier("G:\My Drive\Poli\SEM 5\ResNet50V2.h5")
-            my_prediction = LogoClassfier("G:\My Drive\FYP2024\ResNet50V2_New.h5")
             
+            # To retrieve created class from logo_identifier.py file
+            # Path is any local path that has model path
+            my_prediction = LogoClassfier("G:\My Drive\Poli\SEM 5\ResNet50V2.h5")
 
             with display_section.container():
                 for cropped_image in st.session_state.cropped_img_list:

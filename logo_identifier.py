@@ -4,6 +4,7 @@ import tensorflow as tf
 import streamlit as st
 
 class LogoClassfier:
+    # To set model path and classes
     def __init__(self, model_path):
         self.model = tf.keras.models.load_model(model_path)
         self.classes = ["tidyman", "plastic_PS", "plastic_PP",
@@ -13,6 +14,7 @@ class LogoClassfier:
                         "period_3m", "period_9m", "mobius_logo", "fsc",
                         "ce_marking", "aluminium"] # 18 classes
 
+    # To load image before feeding to prediction
     def load_img (self, img):
         img = img.resize((224,224))
         img_array = np.array(img)
@@ -22,6 +24,7 @@ class LogoClassfier:
                                     axis=0)
         return img_tensor
 
+    # To predict logo for prediction
     def model_upload(self, cropped_image, loaded_img):
         prediction = self.model.predict(loaded_img)
         pred_class = self.classes[np.argmax(prediction)]
